@@ -198,6 +198,14 @@ Class Vscode : Tools_Manager {
         }
     }
     static [void] Config () {
+        [System_Utils]::Load_Notification("Cài đặt extension vscode",2)
+        
+    }
+    static [void] Install_extension ([string[]] $extensions){
+        foreach ($ext in $extensions){
+            [System_Utils]::Load_Notification("Đang cài đặt extension : $ext", 1)
+            code --install-extension $ext
+        }
     }
 }
 # Obsidian
@@ -421,11 +429,26 @@ class Menu {
         [Setup_Win]::Set_TimeZone_UTC8()
         [Scoop]::Install()
         [git]::Install();[git]::Config("Mr.thai", "Mr.thai2k5@gmail.com")
-        $buckets_Scoop = @("extras", "versions", "main")
+        $Buckets_Scoop = @("extras", "versions", "main")
         $Packages_Scoop = @("extras/googlechrome","extras/winrar")
-        [Scoop]::Install_Bucket($buckets_Scoop);[Scoop]::Install_Packages($Packages_Scoop)
+        [Scoop]::Install_Bucket($Buckets_Scoop);[Scoop]::Install_Packages($Packages_Scoop)
         [Setup_Win]::RunChristitus()
-        [Vscode]::Install(); [Vscode]::Config()
+        $extension_vscode = @(
+            "ms-vscode.powershell",                     # PowerShell
+            "esbenp.prettier-vscode",                   # Prettier
+            "dbaeumer.vscode-eslint",                   # ESLint
+            "christian-kohler.path-intellisense",       # Path Intellisense
+            "formulahendry.auto-rename-tag",            # Auto Rename Tag
+            "dracula-theme.theme-dracula",              # Dracula Theme
+            "burkeholland.simple-react-snippets",       # Simple React Snippets
+            "bradlc.vscode-tailwindcss",                # Tailwind CSS IntelliSense
+            "ritwickdey.liveserver",                    # Live Server
+            "streetsidesoftware.code-spell-checker",    # Code Spell Checker
+            "wayou.vscode-todo-highlight",              # TODO Highlight
+            "alefragnani.bookmarks",                    # Bookmarks
+            "eamodio.gitlens"                           # GitLens
+        )
+        [Vscode]::Install(); [Vscode]::Config(); [Vscode]::Install_extension($extension_vscode)
         [Obsidian]::Install(); [Obsidian]::Config()
         [ObsStudio]::Install(); [ObsStudio]::Config()
         [Idm]::Install(); [Idm]::Config()
@@ -456,6 +479,5 @@ class Menu {
 }
 
 #endregion
-
 # Khối script chính
 [Menu]::MenuMain()
