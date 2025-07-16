@@ -1,0 +1,37 @@
+{
+  "WPFTweaks": [
+    "WPFTweaksRestorePoint",
+    "WPFTweaksRightClickMenu",
+    "WPFTweaksDisableExplorerAutoDiscovery",
+    "WPFTweaksEndTaskOnTaskbar",
+    "WPFTweaksDeleteTempFiles",
+    "WPFTweaksHome",
+    "WPFTweaksRemoveHome",
+    "WPFTweaksHiber",
+    "WPFTweaksPowershell7",
+    "WPFTweaksRemoveCopilot",
+    "WPFTweaksPowershell7Tele",
+    "WPFTweaksDisableBGapps",
+    "WPFTweaksTeredo",
+    "WPFTweaksTele",
+    "WPFTweaksServices",
+    "WPFTweaksIPv46",
+    "WPFTweaksDisableFSO",
+    "WPFTweaksDisableLMS1",
+    "WPFTweaksAH",
+    "WPFTweaksDiskCleanup",
+    "WPFTweaksConsumerFeatures",
+    "WPFTweaksStorage",
+    "WPFTweaksDisplay",
+    "WPFTweaksBlockAdobeNet",
+    "WPFTweaksRecallOff",
+    "WPFTweaksDisableipsix",
+    "WPFTweaksWifi",
+    "WPFTweaksDebloatAdobe"
+  ],
+  "WPFInstall": [],
+  "Install": [],
+  "WPFFeature": [
+    "WPFFeaturesdotnet"
+  ]
+}

@@ -1,0 +1,31 @@
+<Configuration>
+  <!-- Chia sẻ thư mục từ máy thật -->
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>D:\gitManager</HostFolder> <!-- Thư mục chia sẻ -->
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+
+  <!-- Tự động chạy PowerShell script test.ps1 khi khởi động -->
+  <LogonCommand>
+    <Command>powershell.exe -ExecutionPolicy Bypass -File "D:\gitManager"</Command>
+  </LogonCommand>
+
+  <!-- Cho phép kết nối mạng -->
+  <Networking>Enable</Networking>
+
+  <!-- GPU ảo giúp chạy mượt app GUI -->
+  <VGpu>Enable</VGpu>
+
+  <!-- Cho phép copy-paste giữa máy thật và sandbox -->
+  <ClipboardRedirection>Enable</ClipboardRedirection>
+
+  <!-- Vô hiệu hóa camera, mic, printer để bảo mật -->
+  <AudioInput>Disable</AudioInput>
+  <VideoInput>Disable</VideoInput>
+  <PrinterRedirection>Disable</PrinterRedirection>
+
+  <!-- RAM vừa đủ cho app/script trung bình -->
+  <MemoryInMB>3072</MemoryInMB>
+</Configuration>
