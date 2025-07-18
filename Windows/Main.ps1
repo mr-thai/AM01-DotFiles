@@ -246,6 +246,15 @@ class Idm : Tools_Manager {
         [System_Utils]::Run_Admin("iex(irm is.gd/idm_reset)")
     }
 }
+class Docker : Tools_Manager {
+    static [void] install (){
+        if (-not [System_Utils]::Is_Install("docker")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt Internet Download Manager...", 1)
+            winget install Docker.DockerDesktop -e --accept-source-agreements --accept-package-agreements
+            [System_Utils]::Load_Notification("Internet Download Manager đã được cài đặt thành công!", 2)
+        }
+    }
+}
 #endregion
 
 #region thiết lập Windows

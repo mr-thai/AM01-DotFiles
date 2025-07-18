@@ -138,3 +138,14 @@ PS>.\Main.ps1
 4. Crack IDM
 5. Crack Win 365
 0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>git push -m main
+
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
