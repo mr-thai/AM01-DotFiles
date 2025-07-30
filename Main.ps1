@@ -1,63 +1,86 @@
 ﻿#region thiết lập hệ thống
 class System_Utils {
     static [bool] Is_User_Admin () {
-        if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-            return $false
-        }else{
-            return $true
-        }
-    } 
-    static [void] Load_Notification ([string]$Noidung, [int]$Loai) {
-        switch ($Loai) {
-            1 { Write-Host "$Noidung" -ForegroundColor Cyan; break }
-            2 { Write-Host "$Noidung" -ForegroundColor Green; break }
-            3 { Write-Host "$Noidung" -ForegroundColor Red; break }
-            4 { Write-Host "$Noidung" -ForegroundColor Yellow; break }
-            default { Write-Host "$Noidung" }
-        }
+        $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $principal = New-Object Security.Principal.WindowsPrincipal($user)
+        return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
     }
+
+    static [void] Load_Notification ([string]$Noidung, [int]$Loai) {
+        $prefix = ""
+        $color = "White"
+        switch ($Loai) {
+            1 { $prefix = "[INFO]";    $color = "Cyan"; break }
+            2 { $prefix = "[OK]";      $color = "Green"; break }
+            3 { $prefix = "[ERROR]";   $color = "Red"; break }
+            4 { $prefix = "[WARNING]"; $color = "Yellow"; break }
+            default { $prefix = "[LOG]"; $color = "White" }
+        }
+        Write-Host "$prefix $Noidung" -ForegroundColor $color
+    }
+
     static [bool] Is_Install ([string]$Ten) {
-        if (Get-Command $Ten -ErrorAction SilentlyContinue) {
-            [System_Utils]::Load_Notification("$Ten đã được cài đặt.",2) 
+        $cmd = Get-Command $Ten -ErrorAction SilentlyContinue
+        if ($cmd) {
+            $path = $cmd.Source
+            $type = $cmd.CommandType
+            [System_Utils]::Load_Notification("✅ [$type] $Ten đã được cài đặt tại: $path", 2)
             return $true
         } else {
-            [System_Utils]::Load_Notification("$Ten chưa được cài đặt.",3)
+            [System_Utils]::Load_Notification("❌ $Ten chưa được cài đặt hoặc không có trong PATH.", 3)
             return $false
         }
     }
+
     static [void] Load_Countdown([int]$Thoi_Gian) {
-        for ($i = $Thoi_Gian; $i -ge 0; $i--) {
-            Write-Progress -Activity "Đang chờ..." -Status "$i giây còn lại..." -PercentComplete ((($Thoi_Gian - $i) / $Thoi_Gian) * 100)
+        if ($Thoi_Gian -le 0) {
+            Write-Progress -Activity "Đang chờ..." -Status "Không cần đợi!" -Completed
+            return
+        }
+        for ($i = $Thoi_Gian; $i -ge 1; $i--) {
+            $percent = if ($Thoi_Gian -ne 0) { ((($Thoi_Gian - $i) / $Thoi_Gian) * 100) } else { 100 }
+            Write-Progress -Activity "Đang chờ..." -Status "$i giây còn lại..." -PercentComplete $percent
             Start-Sleep -Seconds 1
         }
         Write-Progress -Activity "Đang chờ..." -Status "Hoàn tất" -Completed
     }
+
     static [void] Create_New_Window([string]$Command, [bool]$LoadAdmin = $false) {
         if (-not $Command) { return }
 
-        $tempFile = "$env:TEMP\__run_temp__.ps1"
+        $guid = [guid]::NewGuid().ToString()
+        $tempFile = "$env:TEMP\run_temp_$guid.ps1"
         $scriptContent = "try { $Command } finally { Remove-Item -Path `"$tempFile`" -Force }"
+
         Set-Content -Path $tempFile -Value $scriptContent -Encoding UTF8
 
         $argsPS = @("-ExecutionPolicy", "Bypass", "-File", $tempFile)
-        if ($LoadAdmin) {
-            Start-Process powershell -ArgumentList $argsPS -Verb RunAs
-        } else {
-            Start-Process powershell -ArgumentList $argsPS
+        try {
+            if ($LoadAdmin) {
+                Start-Process powershell -ArgumentList $argsPS -Verb RunAs
+            } else {
+                Start-Process powershell -ArgumentList $argsPS
+            }
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không thể tạo cửa sổ mới: $($_.Exception.Message)", 3)
         }
     }
+
     static [void] Run_Admin([string]$Command) {
         if (-not $Command) {
-            [System_Utils]::Load_Notification("Lệnh không hợp lệ, không thể chạy!",3)
+            [System_Utils]::Load_Notification("❌ Lệnh không hợp lệ, không thể chạy!", 3)
             return
         }
+
         try {
             $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($Command))
-           Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $encoded" -Verb RunAs
+            Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $encoded" -Verb RunAs
+            [System_Utils]::Load_Notification("🚀 Đã gửi lệnh với quyền Admin: $Command", 1)
         } catch {
-            [System_Utils]::Load_Notification("❌ Không thể chạy lệnh với quyền Admin: $Command", 3)
+            [System_Utils]::Load_Notification("❌ Không thể chạy lệnh Admin: $($_.Exception.Message)", 3)
         }
     }
+
 }
 #endregion
 
@@ -560,4 +583,93 @@ class Main {
 }
 #endregion
 # Khối script chính
-[Main]::MainStart()
+# [Main]::MainStart()
+
+function Test_Is_User_Admin {
+    Write-Host "`n🧪 Testing: Is_User_Admin()" -ForegroundColor Blue
+    $result = [System_Utils]::Is_User_Admin()
+    if ($result) {
+        Write-Host "✅ Bạn đang chạy với quyền Admin." -ForegroundColor Green
+    } else {
+        Write-Host "⚠️ Bạn KHÔNG chạy với quyền Admin." -ForegroundColor Yellow
+    }
+}
+
+function Test_Load_Notification {
+    Write-Host "`n🧪 Testing: Load_Notification()" -ForegroundColor Blue
+    [System_Utils]::Load_Notification("Thông báo kiểu INFO", 1)
+    [System_Utils]::Load_Notification("Thông báo kiểu OK", 2)
+    [System_Utils]::Load_Notification("Thông báo kiểu ERROR", 3)
+    [System_Utils]::Load_Notification("Thông báo kiểu WARNING", 4)
+    [System_Utils]::Load_Notification("Thông báo mặc định", 99)
+}
+
+function Test_Is_Install {
+    Write-Host "`n🧪 Testing: Is_Install()" -ForegroundColor Blue
+    $existingCmds = @("powershell", "Get-Process", "Write-Host")
+    $missingCmds  = @("fakeTool_ABC", "NothingTool_999")
+
+    foreach ($cmd in $existingCmds) {
+        $result = [System_Utils]::Is_Install($cmd)
+        Write-Host "$cmd exists? $result" -ForegroundColor Cyan
+    }
+
+    foreach ($cmd in $missingCmds) {
+        $result = [System_Utils]::Is_Install($cmd)
+        Write-Host "$cmd exists? $result" -ForegroundColor Cyan
+    }
+}
+
+function Test_Load_Countdown {
+    Write-Host "`n🧪 Testing: Load_Countdown()" -ForegroundColor Blue
+    Write-Host "⏱️ Đếm ngược 3 giây..."
+    [System_Utils]::Load_Countdown(3)
+
+    Write-Host "`n⏱️ Test thời gian = 0 (bỏ qua)..."
+    [System_Utils]::Load_Countdown(0)
+
+    Write-Host "`n⏱️ Test thời gian âm..."
+    [System_Utils]::Load_Countdown(-2)
+}
+
+function Test_Create_New_Window {
+    Write-Host "`n🧪 Testing: Create_New_Window()" -ForegroundColor Blue
+
+    Write-Host "🔹 Tạo cửa sổ bình thường chạy Write-Host..."
+    [System_Utils]::Create_New_Window("Write-Host 'Cửa sổ thường OK!'", $false)
+
+    Write-Host "🔹 Tạo cửa sổ admin chạy Write-Host..."
+    [System_Utils]::Create_New_Window("Write-Host 'Admin OK!'", $true)
+
+    Write-Host "🔹 Test chuỗi rỗng..."
+    [System_Utils]::Create_New_Window("", $false)
+
+
+}
+
+function Test_Run_Admin {
+    Write-Host "`n🧪 Testing: Run_Admin()" -ForegroundColor Blue
+
+    Write-Host "🔹 Chạy lệnh Write-Host với quyền Admin..."
+    [System_Utils]::Run_Admin("Write-Host 'Chạy Admin OK'")
+
+    Write-Host "🔹 Test lệnh sai..."
+    [System_Utils]::Run_Admin("ThisIsNotAValidCommand")
+
+    Write-Host "🔹 Test chuỗi rỗng..."
+    [System_Utils]::Run_Admin("")
+}
+
+# =============================
+# RUN ALL TESTS
+# =============================
+Write-Host "🚀 BẮT ĐẦU CHẠY TOÀN BỘ TEST CHO: System_Utils" -ForegroundColor Magenta
+
+Test_Is_User_Admin
+Test_Load_Notification
+Test_Is_Install
+Test_Load_Countdown
+Test_Create_New_Window
+Test_Run_Admin
+
+Write-Host "`n✅ TOÀN BỘ TEST ĐÃ CHẠY XONG!" -ForegroundColor Green
