@@ -1,0 +1,151 @@
+**********************
+PowerShell transcript start
+Start time: 20250717065112
+Username: DESKTOP-A6R200J\mrtha
+RunAs User: DESKTOP-A6R200J\mrtha
+Configuration Name: 
+Machine: DESKTOP-A6R200J (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.0\data\user-data\logs\20250717T062227\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.0\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-6580-208218.json' -FeatureFlags @() 
+Process ID: 2196
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\Main.ps1
+extensions: D:\gitManager\AM01_Alpha\DotFiles\Main.ps1:205:26
+Line |
+ 205 |          foreach ($ext in extensions){
+     |                           ~~~~~~~~~~
+     | The term 'extensions' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+extensions: D:\gitManager\AM01_Alpha\DotFiles\Main.ps1:205:26
+Line |
+ 205 |          foreach ($ext in extensions){
+     |                           ~~~~~~~~~~
+     | The term 'extensions' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included,
+     | verify that the path is correct and try again.
+
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\Main.ps1
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\Main.ps1
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\Main.ps1
+Đang cài đặt extension : ms-vscode.powershell
+Đang cài đặt extension : esbenp.prettier-vscode
+Đang cài đặt extension : dbaeumer.vscode-eslint
+Đang cài đặt extension : christian-kohler.path-intellisense
+Đang cài đặt extension : formulahendry.auto-rename-tag
+Đang cài đặt extension : dracula-theme.theme-dracula
+Đang cài đặt extension : burkeholland.simple-react-snippets
+Đang cài đặt extension : bradlc.vscode-tailwindcss
+Đang cài đặt extension : ritwickdey.liveserver
+Đang cài đặt extension : streetsidesoftware.code-spell-checker
+Đang cài đặt extension : wayou.vscode-todo-highlight
+Đang cài đặt extension : alefragnani.bookmarks
+Đang cài đặt extension : eamodio.gitlens
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\Main.ps1
+Đang cài đặt extension : ms-vscode.powershell
+Đang cài đặt extension : esbenp.prettier-vscode
+Đang cài đặt extension : dbaeumer.vscode-eslint
+Đang cài đặt extension : christian-kohler.path-intellisense
+Đang cài đặt extension : formulahendry.auto-rename-tag
+Đang cài đặt extension : dracula-theme.theme-dracula
+Đang cài đặt extension : burkeholland.simple-react-snippets
+Đang cài đặt extension : bradlc.vscode-tailwindcss
+Đang cài đặt extension : ritwickdey.liveserver
+Đang cài đặt extension : streetsidesoftware.code-spell-checker
+Đang cài đặt extension : wayou.vscode-todo-highlight
+Đang cài đặt extension : alefragnani.bookmarks
+Đang cài đặt extension : eamodio.gitlens
+🔧 Chào mừng đến với Menu thiết lập hệ thống!
+1. Setup All
+2. Setup All -no Config
+3. Show Info
+4. Crack IDM
+5. Crack Win 365
+0. Thoát
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>git push -m main
+
+]633;D;1]633;A]633;P;Cwd=D:\x5cgitManager\x5cAM01_Alpha\x5cDotFilesPS D:\gitManager\AM01_Alpha\DotFiles> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""

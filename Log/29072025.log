@@ -1,0 +1,297 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20250729183824
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: powershell -NoProfile -ExecutionPolicy Bypass -File D:\Dev\AM01-DotFiles\Windows\Main.ps1
+Process ID: 16180
+PSVersion: 5.1.26100.4652
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.4652
+BuildVersion: 10.0.26100.4652
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+nvim đã được cài đặt.
+📥 Đang tải font Meslo (v3.2.0)...
+✅ Đã cài: MesloLGLDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGLNerdFont-Bold.ttf
+✅ Đã cài: MesloLGLNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFont-Italic.ttf
+✅ Đã cài: MesloLGLNerdFont-Regular.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGLNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGMNerdFont-Bold.ttf
+✅ Đã cài: MesloLGMNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFont-Italic.ttf
+✅ Đã cài: MesloLGMNerdFont-Regular.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGMNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGSNerdFont-Bold.ttf
+✅ Đã cài: MesloLGSNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFont-Italic.ttf
+✅ Đã cài: MesloLGSNerdFont-Regular.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGSNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Regular.ttf
+🎉 Cài đặt font Meslo thành công!
+🔧 Đang clone LazyVim từ GitHub...
+curl đã được cài đặt.
+wget đã được cài đặt.
+gcc chưa được cài đặt.
+📦 Đang cài: gcc
+Cannot find an overload for "Install_Packages" and the argument count: "2".
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:372 char:17
++                 [Scoop]::Install_Packages($pkg, 1)
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+Cannot find an overload for "Install_Packages" and the argument count: "2".
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:372 char:17
++                 [Scoop]::Install_Packages($pkg, 1)
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+
+PS>$global:?
+True
+**********************
+Windows PowerShell transcript start
+Start time: 20250729184601
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: powershell -NoProfile -ExecutionPolicy Bypass -File D:\Dev\AM01-DotFiles\Windows\Main.ps1
+Process ID: 15016
+PSVersion: 5.1.26100.4652
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.4652
+BuildVersion: 10.0.26100.4652
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+nvim đã được cài đặt.
+📥 Đang tải font Meslo (v3.2.0)...
+✅ Đã cài: MesloLGLDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGLDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGLNerdFont-Bold.ttf
+✅ Đã cài: MesloLGLNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFont-Italic.ttf
+✅ Đã cài: MesloLGLNerdFont-Regular.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGLNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGLNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGLNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGMDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGMNerdFont-Bold.ttf
+✅ Đã cài: MesloLGMNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFont-Italic.ttf
+✅ Đã cài: MesloLGMNerdFont-Regular.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGMNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGMNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGMNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFont-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGSDZNerdFontPropo-Regular.ttf
+✅ Đã cài: MesloLGSNerdFont-Bold.ttf
+✅ Đã cài: MesloLGSNerdFont-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFont-Italic.ttf
+✅ Đã cài: MesloLGSNerdFont-Regular.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Bold.ttf
+✅ Đã cài: MesloLGSNerdFontMono-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Italic.ttf
+✅ Đã cài: MesloLGSNerdFontMono-Regular.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Bold.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-BoldItalic.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Italic.ttf
+✅ Đã cài: MesloLGSNerdFontPropo-Regular.ttf
+🎉 Cài đặt font Meslo thành công!
+🔧 Đang clone LazyVim từ GitHub...
+Remove-Item : Cannot find path 'C:\Users\mrtha\AppData\Local\nvim\.git' because it does not exist.
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:360 char:9
++         Remove-Item "$env:LOCALAPPDATA\nvim\.git" -Recurse -Force
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\mrtha\AppData\Local\nvim\.git:String) [Remove-Item], 
+ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+Remove-Item : Cannot find path 'C:\Users\mrtha\AppData\Local\nvim\.git' because it does not exist.
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:360 char:9
++         Remove-Item "$env:LOCALAPPDATA\nvim\.git" -Recurse -Force
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\mrtha\AppData\Local\nvim\.git:String) [Remove-Item], ItemNotFo
+   undException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+
+curl đã được cài đặt.
+wget đã được cài đặt.
+gcc chưa được cài đặt.
+📦 Đang cài: gcc
+Cannot find an overload for "Install_Packages" and the argument count: "2".
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:372 char:17
++                 [Scoop]::Install_Packages($pkg, 1)
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+Cannot find an overload for "Install_Packages" and the argument count: "2".
+At D:\Dev\AM01-DotFiles\Windows\Main.ps1:372 char:17
++                 [Scoop]::Install_Packages($pkg, 1)
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodCountCouldNotFindBest
+
+PS>$global:?
+True
+﻿**********************
+PowerShell transcript start
+Start time: 20250729202914
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250729T170816\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-15112-331607.json' -FeatureFlags @() 
+Process ID: 13412
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+nvim đã được cài đặt.
+🔧 Đang clone LazyVim từ GitHub...
+Remove-Item: D:\Dev\AM01-DotFiles\Windows\Main.ps1:359:9
+Line |
+ 359 |          Remove-Item "$env:LOCALAPPDATA\nvim\.git" -Recurse -Force
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mrtha\AppData\Local\nvim\.git' because it does not exist.
+Remove-Item: D:\Dev\AM01-DotFiles\Windows\Main.ps1:359:9
+Line |
+ 359 |          Remove-Item "$env:LOCALAPPDATA\nvim\.git" -Recurse -Force
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mrtha\AppData\Local\nvim\.git' because it does not exist.
+
+curl đã được cài đặt.
+wget chưa được cài đặt.
+📦 Đang cài: wget
+Installed apps:
+wget chưa được cài đặt.
+Đang cài đặt: wget
+Updating Scoop...
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
