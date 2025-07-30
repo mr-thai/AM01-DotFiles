@@ -5,7 +5,6 @@ class System_Utils {
         $principal = New-Object Security.Principal.WindowsPrincipal($user)
         return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
     }
-
     static [void] Load_Notification ([string]$Noidung, [int]$Loai) {
         $prefix = ""
         $color = "White"
@@ -18,7 +17,6 @@ class System_Utils {
         }
         Write-Host "$prefix $Noidung" -ForegroundColor $color
     }
-
     static [bool] Is_Install ([string]$Ten) {
         $cmd = Get-Command $Ten -ErrorAction SilentlyContinue
         if ($cmd) {
@@ -27,11 +25,10 @@ class System_Utils {
             [System_Utils]::Load_Notification("✅ [$type] $Ten đã được cài đặt tại: $path", 2)
             return $true
         } else {
-            [System_Utils]::Load_Notification("❌ $Ten chưa được cài đặt hoặc không có trong PATH.", 3)
+            [System_Utils]::Load_Notification("$Ten chưa được cài đặt hoặc không có trong PATH.", 3)
             return $false
         }
     }
-
     static [void] Load_Countdown([int]$Thoi_Gian) {
         if ($Thoi_Gian -le 0) {
             Write-Progress -Activity "Đang chờ..." -Status "Không cần đợi!" -Completed
@@ -44,7 +41,6 @@ class System_Utils {
         }
         Write-Progress -Activity "Đang chờ..." -Status "Hoàn tất" -Completed
     }
-
     static [void] Create_New_Window([string]$Command, [bool]$LoadAdmin = $false) {
         if (-not $Command) { return }
 
@@ -62,13 +58,12 @@ class System_Utils {
                 Start-Process powershell -ArgumentList $argsPS
             }
         } catch {
-            [System_Utils]::Load_Notification("❌ Không thể tạo cửa sổ mới: $($_.Exception.Message)", 3)
+            [System_Utils]::Load_Notification("Không thể tạo cửa sổ mới: $($_.Exception.Message)", 3)
         }
     }
-
     static [void] Run_Admin([string]$Command) {
         if (-not $Command) {
-            [System_Utils]::Load_Notification("❌ Lệnh không hợp lệ, không thể chạy!", 3)
+            [System_Utils]::Load_Notification("Lệnh không hợp lệ, không thể chạy!", 3)
             return
         }
 
@@ -77,13 +72,23 @@ class System_Utils {
             Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $encoded" -Verb RunAs
             [System_Utils]::Load_Notification("🚀 Đã gửi lệnh với quyền Admin: $Command", 1)
         } catch {
-            [System_Utils]::Load_Notification("❌ Không thể chạy lệnh Admin: $($_.Exception.Message)", 3)
+            [System_Utils]::Load_Notification("Không thể chạy lệnh Admin: $($_.Exception.Message)", 3)
         }
     }
-
+    static [void] Check_Internet() {
+        try {
+            $url = "https://www.google.com"
+            $result = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 5
+            if ($result.StatusCode -ne 200) {
+                throw "Không thể kết nối."
+            }
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không có kết nối Internet. Thoát chương trình!", 3)
+            exit
+        }
+    }
 }
 #endregion
-
 #region thiết lập packages manager
 Class Packages_Manager {
     static [void] Install () {
@@ -94,9 +99,6 @@ Class Packages_Manager {
     }
     static [bool] Check_Package ([string[]]$Ten) {
         return $false
-    }
-    static [void] Optimize () {
-        throw "Class con phải override"
     }
 }
 class Scoop : Packages_Manager {
@@ -129,7 +131,7 @@ class Scoop : Packages_Manager {
 class Winget : Packages_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("winget")) {
-            [System_Utils]::Load_Notification("❌ Winget không khả dụng trên hệ thống này!", 3)
+            [System_Utils]::Load_Notification("Winget không khả dụng trên hệ thống này!", 3)
             throw "Winget không được cài sẵn. Hãy cập nhật Windows hoặc dùng Scoop/Choco thay thế."
         }
     }
@@ -154,7 +156,29 @@ class Winget : Packages_Manager {
         return $null -ne ($installed | Where-Object { $_ -match "^$Ten" })
     }
 }
-
+class Windows_Features : Packages_Manager {
+    static [void] Install () {
+        if (-not [System_Utils]::Is_Install("Enable-WindowsOptionalFeature")) {
+        [System_Utils]::Load_Notification("Enable-WindowsOptionalFeature không khả dụng trên hệ thống này!", 3)
+        throw "Enable-WindowsOptionalFeature không được hỗ trợ. Hãy cập nhật Windows hoặc dùng Scoop/Choco thay thế."
+        }
+    }
+    static [void] Install_Packages ([string[]]$Ten) {
+        foreach ($feature in $Ten) {
+            if (-not [Windows_Features]::Check_Package($feature)) {
+                [System_Utils]::Run_Admin("Enable-WindowsOptionalFeature -Online -FeatureName $feature -All -NoRestart")
+                [System_Utils]::Load_Notification("✅ Đã cài đặt: $feature", 2)
+            } else {
+                [System_Utils]::Load_Notification("✅ $feature đã được cài đặt.", 2)
+            }
+        }
+    }
+    static [bool] Check_Package([string]$Ten) {
+        $installed = Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq $Ten }
+        if (-not $installed) { return $false }
+        return $installed.State -eq "Enabled"
+    }
+}
 #endregion
 #region thiết lập tools
 class Tools_Manager {
@@ -174,16 +198,18 @@ class Git : Tools_Manager {
         } 
     }
     static [void] Config () {
-            $Name = "Mr.thai" + $env:COMPUTERNAME
-            $Email = "mr.thai2k5@gmail.com"
+        [git]::Configure_git()
+    }
+    static [void] Configure_git () {
+        $Name = "Mr.thai" + $env:COMPUTERNAME
+        $Email = "mr.thai2k5@gmail.com"
         try {
             git config --global user.name  $Name
             git config --global user.email $Email
             [System_Utils]::Load_Notification("Đã cấu hình Git với tên: $Name và email: $Email", 2)
         } catch {
-            [System_Utils]::Load_Notification("❌ Lỗi khi cấu hình Git: $($_.Exception.Message)", 3)
+            [System_Utils]::Load_Notification("Lỗi khi cấu hình Git: $($_.Exception.Message)", 3)
         }
-
     }
 }
 Class Vscode : Tools_Manager {
@@ -220,7 +246,6 @@ Class Vscode : Tools_Manager {
         }
     }
 }
-# Obsidian
 Class Obsidian : Tools_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("obsidian")) {
@@ -265,10 +290,25 @@ class Docker : Tools_Manager {
             [System_Utils]::Load_Notification("Docker đã được cài đặt thành công!", 2)
         }
     }
+    static [void] Config () {
+
+    }
 }
 class VisualStudio : Tools_Manager{
+    static [void] Install () {
+
+    }
+    static [void] Config () {
+
+    }
 }
 class AndroidStudio : Tools_Manager{
+    static [void] Install () {
+
+    }
+    static [void] Config () {
+
+    }
 }
 class LazyVim : Tools_Manager {
     static [void] Install () {
@@ -305,7 +345,7 @@ class LazyVim : Tools_Manager {
         try {
             Invoke-WebRequest -Uri $url -OutFile $zipPath -UseBasicParsing -ErrorAction Stop
         } catch {
-            [System_Utils]::Load_Notification("❌ Lỗi khi tải font: $_", 3)
+            [System_Utils]::Load_Notification("Lỗi khi tải font: $_", 3)
             return
         }
 
@@ -315,7 +355,7 @@ class LazyVim : Tools_Manager {
             }
             Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
         } catch {
-            [System_Utils]::Load_Notification("❌ Lỗi khi giải nén font: $_", 3)
+            [System_Utils]::Load_Notification("Lỗi khi giải nén font: $_", 3)
             return
         }
 
@@ -372,115 +412,222 @@ class LazyVim : Tools_Manager {
         nvim --headless "+Lazy! sync" +qa
     }
 }
-#endregion
-#region thiết lập Windows
-class Setup_Win {
-    static [void] Disable_UAC () {
-        [System_Utils]::Load_Notification("🔧 Đang vô hiệu hóa UAC...", 1)
-        $cmd = "Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name ConsentPromptBehaviorAdmin -Value 0"
-        if ([System_Utils]::Is_User_Admin()) {
-            [System_Utils]::Run_Admin("Invoke-Expression $cmd")
-        } else {
-            [System_Utils]::Run_Admin($cmd)
-        }
-    }
-    static [void] Set_TimeZone_UTC8() {
-        $tzId = "SE Asia Standard Time"
-        try {
-            [System_Utils]::Load_Notification("🌏 Đang đặt múi giờ về UTC+8 ($tzId)...", 1)
-            tzutil /s $tzId
-            [System_Utils]::Load_Notification("✅ Đã đặt múi giờ thành công.", 2)
-        } catch {
-            [System_Utils]::Load_Notification("❌ Lỗi khi đặt múi giờ: $_", 3)
-        }
-    }
-    static [void] Activate_Win_Office() {
-        $winActivated     = $null -ne (Get-CimInstance SoftwareLicensingProduct | Where-Object { $_.Name -like "Windows*" -and $_.LicenseStatus -eq 1 })
-        $officeInstalled  = Get-CimInstance Win32_Product | Where-Object { $_.Name -match "Office" }
-        $officeActivated  = $null -ne $officeInstalled -and $null -ne (Get-CimInstance SoftwareLicensingProduct | Where-Object { $_.Name -match "Office" -and $_.LicenseStatus -eq 1 })
-
-        if ($winActivated -and ($null -eq $officeInstalled -or $officeActivated)) {
-            [System_Utils]::Load_Notification("✅ Windows và Office đã được kích hoạt. Bỏ qua bước này.", 0)
+class WSL : Tools_Manager {
+    static [void] Install () {
+        if (-not [System_Utils]::Is_Install("wsl")) {
+            [System_Utils]::Load_Notification("Hệ thống không hỗ trợ WSL hoặc chưa có WSL!", 3)
             return
         }
-
-        $cmd = 'irm https://get.activated.win | iex; MAS_AIO.cmd /Online /Silent'
-        [System_Utils]::Load_Notification("⚙️ Đang kích hoạt Windows + Office (Online KMS, silent)...", 1)
-        [System_Utils]::Create_New_Window($cmd, $true)
-    }
-    static [void] Install_VC_AllInOne() {
-        $url  = "https://github.com/abbodi1406/vcredist/releases/latest/download/VisualCppRedist_AIO_x86_x64.exe"
-        $file = "$env:TEMP\VisualCppRedist_AIO.exe"
-
-        try {
-            Write-Host "📥 Đang tải VC++ Redistributable AIO..." -ForegroundColor Cyan
-            [System_Utils]::Run_Admin("Invoke-WebRequest '$url' -OutFile '$file' -UseBasicParsing")
-
-            Write-Host "🔧 Đang cài đặt VC++ Redistributable..." -ForegroundColor Yellow
-            [System_Utils]::Run_Admin("Start-Process -FilePath '$file' -ArgumentList '/y' -Wait")
-
-            Write-Host "✅ Cài đặt VC++ hoàn tất." -ForegroundColor Green
-        } catch {
-            Write-Host "❌ Lỗi khi cài đặt VC++: $($_.Exception.Message)" -ForegroundColor Red
-        }
-    }
-    static [void] RunChristitus() {
-        $Config = Join-Path -Path $PSScriptRoot -ChildPath "File_Config\Christitus\config_Default.json"
-        $cmd = "`$script = Invoke-RestMethod https://christitus.com/win; & ([scriptblock]::Create(`$script)) -Config `"$Config`" -Run"
-        [System_Utils]::Create_New_Window($cmd, $true)
-    }
-    static [void] Create_GodMode() {
-        $desktopPath = [Environment]::GetFolderPath("Desktop")
-        $godModeName = "GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
-        $godModePath = Join-Path $desktopPath $godModeName
-        if (-Not (Test-Path $godModePath)) {
-            New-Item -Path $godModePath -ItemType Directory | Out-Null
-            Write-Host "✅ GodMode đã được tạo tại: $godModePath"
-        } else {
-            Write-Host "⚠️ Thư mục GodMode đã tồn tại tại: $godModePath"
-        }
-    }
-    static [void] Setup_Virtual() {
-        [System_Utils]::Load_Notification("🔧 Đang thiết lập Ảo hoá: hyper-v, WSL và Ubuntu...", 1)
-        # Bật các tính năng cần thiết
-        $features = @(
-            "Microsoft-Hyper-V",
-            "Microsoft-Windows-Subsystem-Linux",
-            "VirtualMachinePlatform",
-            "Containers"
-        )
-        $featureCmds = $features | ForEach-Object {
-            "Enable-WindowsOptionalFeature -Online -FeatureName $_ -All -NoRestart"
-        }
-        [System_Utils]::Run_Admin($featureCmds -join "`n")
-
-        # Cài đặt hoặc cập nhật WSL Core
+        [System_Utils]::Load_Notification("🔧 Đang kiểm tra/cài đặt WSL kernel...", 1)
         try {
             wsl --status *>$null
             [System_Utils]::Run_Admin("wsl --update")
         } catch {
             [System_Utils]::Run_Admin("wsl --install --no-launch --web-download")
         }
-
-        # Kiểm tra và cài Ubuntu nếu chưa có
+        [System_Utils]::Load_Notification("✅ WSL đã được cài đặt hoặc cập nhật thành công.", 2)
+    }
+    static [void] Config () {
+        [System_Utils]::Load_Notification("⚙️ Đang cấu hình WSL sau cài đặt...", 1)
         $hasUbuntu = (& wsl -l -q) -match "^Ubuntu"
         if (-not $hasUbuntu) {
             [System_Utils]::Run_Admin("wsl --install -d Ubuntu-22.04 --no-launch")
+        } else {
+            [System_Utils]::Load_Notification("✅ Ubuntu đã tồn tại trong WSL.", 2)
         }
-        [Winget]::Install_Packages("9PN20MSR04DW") # Cài đặt Ubuntu từ Microsoft Store
-        # Thông báo
-        [System_Utils]::Load_Notification("✅ Ảo hoá, WSL & Ubuntu đã cài thành công! Nhớ **khởi động lại** máy.", 2)
+
+        # Cài Ubuntu từ Store nếu chưa có
+        [Winget]::Install_Packages("9PN20MSR04DW")
+
+        [System_Utils]::Load_Notification("✅ Cấu hình WSL hoàn tất! Hãy khởi động lại nếu cần.", 2)
+    }
+}
+class Office : Tools_Manager {
+    static [void] Install () {
+
+    }
+    static [void] Config () {
+        [Setup_Win]::Activate_KMS_All()
+    }
+}
+#endregion
+#region thiết lập Windows
+class Setup_Win {
+    static [void] Disable_UAC () {
+        [System_Utils]::Load_Notification("🔧 Đang vô hiệu hóa UAC...", 1)
+        $cmd = 'Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force'
+        try {
+            [System_Utils]::Run_Admin($cmd)
+        } catch {
+            [System_Utils]::Load_Notification("Không thể vô hiệu hóa UAC: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] Set_TimeZone_UTC8() {
+        $tzId = "SE Asia Standard Time"
+        try {
+            $currentTz = (Get-TimeZone).Id
+            if ($currentTz -eq $tzId) {
+                [System_Utils]::Load_Notification("⏲️ Múi giờ đã là $tzId, không cần thay đổi.", 1)
+                return
+            }
+
+            [System_Utils]::Load_Notification("🌏 Đang đặt múi giờ về UTC+8 ($tzId)...", 1)
+            Set-TimeZone -Id $tzId
+            [System_Utils]::Load_Notification("✅ Đã đặt múi giờ thành công.", 2)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi đặt múi giờ: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] Activate_KMS_All() {
+        $url = "https://get.activated.win"
+        $scriptPath = "$env:TEMP\MAS_AIO.cmd"
+        $args = "/K-WindowsOffice /K-NoEditionChange /K-NoRenewalTask /S"
+
+        try {
+            [System_Utils]::Load_Notification("🌐 Đang tải script kích hoạt từ $url...", 1)
+
+            # Nếu file đã tồn tại, xóa trước để tránh lỗi
+            if (Test-Path $scriptPath) {
+                Remove-Item $scriptPath -Force -ErrorAction SilentlyContinue
+            }
+
+            Invoke-WebRequest -Uri $url -OutFile $scriptPath -UseBasicParsing
+            [System_Utils]::Load_Notification("✅ Đã tải script về: $scriptPath", 2)
+
+            # Chạy script với quyền Admin và tham số dòng lệnh
+            Start-Process -FilePath $scriptPath -ArgumentList $args -Verb RunAs
+            [System_Utils]::Load_Notification("🚀 Đang kích hoạt Windows + Office bằng Online KMS...", 1)
+            [System_Utils]::Load_Notification("📌 Tham số: $args", 4)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi tải hoặc chạy script: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] Install_VC_AllInOne() {
+        $url       = "https://github.com/abbodi1406/vcredist/releases/latest/download/VisualCppRedist_AIO_x86_x64.exe"
+        $file      = "$env:TEMP\VisualCppRedist_AIO.exe"
+        $vcRegKeys = @(
+            "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64",
+            "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x86"
+        )
+
+        try {
+            # Kiểm tra đã cài đặt VC++ chưa
+            $isInstalled = $false
+            foreach ($key in $vcRegKeys) {
+                if (Test-Path $key) {
+                    $isInstalled = $true
+                    break
+                }
+            }
+
+            if ($isInstalled) {
+                [System_Utils]::Load_Notification("✅ Visual C++ Redistributable đã tồn tại. Bỏ qua cài đặt.", 0)
+                return
+            }
+
+            [System_Utils]::Load_Notification("📥 Đang tải Visual C++ Redistributable AIO...", 1)
+
+            # Tải file nếu chưa tồn tại
+            if (-not (Test-Path $file)) {
+                [System_Utils]::Run_Admin("Invoke-WebRequest -Uri '$url' -OutFile '$file' -UseBasicParsing")
+            } else {
+                [System_Utils]::Load_Notification("🔄 File đã tồn tại. Sử dụng lại để cài đặt.", 1)
+            }
+
+            # Cài đặt silent với tham số /y
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt Visual C++ Redistributable...", 1)
+            [System_Utils]::Run_Admin("Start-Process -FilePath '$file' -ArgumentList '/y' -Wait")
+
+            [System_Utils]::Load_Notification("✅ Hoàn tất cài đặt Visual C++ Redistributable.", 2)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi xử lý Visual C++ Redistributable: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] RunChristitus() {
+        try {
+            $configPath = Join-Path -Path $PSScriptRoot -ChildPath "File_Config\Christitus\config_Default.json"
+            if (-not (Test-Path $configPath)) {
+                [System_Utils]::Load_Notification("Không tìm thấy file cấu hình Christitus tại: $configPath", 3)
+                return
+            }
+            [System_Utils]::Load_Notification("🔧 Đang chạy script tối ưu hệ thống từ Christitus...", 1)
+            $cmd = "`$script = Invoke-RestMethod https://christitus.com/win; & ([scriptblock]::Create(`$script)) -Config `"$configPath`" -Run"
+            [System_Utils]::Create_New_Window($cmd, $true)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi chạy Christitus Script: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] Create_GodMode() {
+        $desktopPath = [Environment]::GetFolderPath("Desktop")
+        $godModeName = "GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}"
+        $godModePath = Join-Path $desktopPath $godModeName
+        try {
+            New-Item -Path $godModePath -ItemType Directory -ErrorAction Stop | Out-Null
+            [System_Utils]::Load_Notification("✅ GodMode đã được tạo tại: $godModePath", 2)
+        } catch {
+            [System_Utils]::Load_Notification("Không thể tạo GodMode: $($_.Exception.Message)", 3)
+        }
+
     }
     static [void] Always_keep_the_screen (){
         [System_Utils]::Run_Admin("powercfg /change standby-timeout-dc 0")
         [System_Utils]::Run_Admin("powercfg /change monitor-timeout-dc 0")
         [System_Utils]::Run_Admin("powercfg /change standby-timeout-ac 0")
         [System_Utils]::Run_Admin("powercfg /change monitor-timeout-ac 0")
+        [System_Utils]::Load_Notification("🔧 Đã dừng tắt màn hình", 2)
+    }
+    static [void] Hide_Widgets () {
+        $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+        $propertyName = "TaskbarDa"
+        try {
+            Set-ItemProperty -Path $registryPath -Name $propertyName -Value 0
+            Write-Host "✅ Đã ẩn Widgets khỏi Taskbar." -ForegroundColor Green
+            Stop-Process -Name explorer -Force
+            Start-Process explorer
+        } catch {
+            Write-Host "Có lỗi xảy ra: $($_.Exception.Message)" -ForegroundColor Red
+        }
+    }
+    static [void] Set_DarkMode () {
+        [System_Utils]::Load_Notification("🌑 Đang bật Dark Mode cho hệ thống và ứng dụng...", 1)
+        try {
+            $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+            # Tạo key nếu chưa có
+            if (-not (Test-Path $regPath)) {
+                New-Item -Path $regPath -Force | Out-Null
+            }
+            # Đặt cả hai giá trị AppsUseLightTheme và SystemUsesLightTheme về 0 (Dark)
+            Set-ItemProperty -Path $regPath -Name "AppsUseLightTheme" -Value 0 -Force
+            Set-ItemProperty -Path $regPath -Name "SystemUsesLightTheme" -Value 0 -Force
 
+            [System_Utils]::Load_Notification("✅ Đã bật chế độ Dark Mode thành công!", 2)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi thiết lập Dark Mode: $($_.Exception.Message)", 3)
+        }
+    }
+    static [void] Auto_Hide_Taskbar () {
+        [System_Utils]::Load_Notification("📐 Đang thiết lập Taskbar tự động ẩn...", 1)
+        try {
+            $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3"
+            $binaryData = (Get-ItemProperty -Path $regPath -Name Settings).Settings
+
+            # Bật tự động ẩn: thay bit thứ 8 (giá trị thứ 8 trong chuỗi) thành 03
+            $binaryData[8] = 0x03
+
+            # Ghi lại giá trị mới
+            Set-ItemProperty -Path $regPath -Name Settings -Value $binaryData
+
+            # Restart Explorer để áp dụng
+            Stop-Process -Name explorer -Force
+            Start-Process explorer.exe
+
+            [System_Utils]::Load_Notification("✅ Taskbar đã được thiết lập tự động ẩn.", 2)
+        } catch {
+            [System_Utils]::Load_Notification("Lỗi khi cấu hình Taskbar tự động ẩn: $($_.Exception.Message)", 3)
+        }
     }
 }
 #endregion
-
 #region hiển thị thông tin hệ thống
 Class Show_Info {
     static [void] Show_RAM_Info() {
@@ -512,15 +659,24 @@ Class Show_Info {
         Write-Host "🖥️ Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
         Write-Host "🔄 Phiên bản driver:      $($gpu.DriverVersion)"
     }
+    static [void] Show_Disk_Info() {
+        $drives = Get-CimInstance Win32_LogicalDisk -Filter "DriveType = 3"
+        Write-Host "`n===== Thông tin Ổ cứng =====" -ForegroundColor Cyan
+        foreach ($drive in $drives) {
+            $used = [math]::Round(($drive.Size - $drive.FreeSpace)/1GB, 2)
+            $total = [math]::Round($drive.Size / 1GB, 2)
+            $percent = [math]::Round($used / $total * 100, 1)
+            Write-Host "💽 Ổ đĩa $($drive.DeviceID): $used/$total GB ($percent% đã dùng)"
+        }
+    }
     static [void] Show_All (){
+        [Show_Info]::Show_Disk_Info();
         [Show_Info]::Show_RAM_Info();
         [Show_Info]::Show_CPU_Info();
         [Show_Info]::Show_GPU_Info();
-
     }
 }
 #endregion
-
 #region menu chính
 class Main {
     static [void] MainStart (){
@@ -537,24 +693,23 @@ class Main {
     static [void] start (){
         # initial setup
         [Setup_Win]::Disable_UAC()
+        [System_Utils]::Check_Internet()
         $Buckets_Scoop = @("extras", "versions", "main")
         [Scoop]::Install(); [Scoop]::Install_Bucket($Buckets_Scoop);
         [git]::Install();[git]::Config()
-        
+        $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
+        [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
         # Setup tools
         $Packages_Scoop = @("extras/winrar")
         [Scoop]::Install_Packages($Packages_Scoop)
-        
-        
         $Packages_Winget = @("DucFabulous.UltraViewer","Microsoft.VisualStudio.2022.Community.Preview","Microsoft.Office")
         [Winget]::Install_Packages($Packages_Winget)
-
-        $Setup_Tools = @("Vscode", "Git", "Obsidian")
+        $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
         foreach ($tool in $Setup_Tools) {
             try {
                 $type = [AppDomain]::CurrentDomain.GetAssemblies().GetTypes() | Where-Object { $_.Name -eq $tool }
                 if ($null -eq $type) {
-                    [System_Utils]::Load_Notification("❌ Không tìm thấy class $tool", 3)
+                    [System_Utils]::Load_Notification("Không tìm thấy class $tool", 3)
                     continue
                 }
                 if ($type.GetMethod("Install")) {
@@ -564,19 +719,19 @@ class Main {
                     $type::Config()
                 }
             } catch {
-                $msg = "❌ Lỗi khi xử lý công cụ $tool : $($_.Exception.Message)"
+                $msg = "Lỗi khi xử lý công cụ $tool : $($_.Exception.Message)"
                 [System_Utils]::Load_Notification($msg, 3)
             }
         }
-        
         # setup win    
-        [Setup_Win]::Set_TimeZone_UTC8()
         [Setup_Win]::RunChristitus()
         [Setup_Win]::Install_VC_AllInOne()
-        [Setup_Win]::Activate_Win_Office()
+        [Setup_Win]::Set_TimeZone_UTC8()
         [Setup_Win]::Create_GodMode()
-        [Setup_Win]::Setup_Virtual()
         [Setup_Win]::Always_keep_the_screen()
+        [Setup_Win]::Hide_Widgets()
+        [Setup_Win]::Set_DarkMode()
+        [Setup_Win]::Auto_Hide_Taskbar()
         # show info
         [Show_Info]::Show_All()
     }
@@ -584,92 +739,3 @@ class Main {
 #endregion
 # Khối script chính
 # [Main]::MainStart()
-
-function Test_Is_User_Admin {
-    Write-Host "`n🧪 Testing: Is_User_Admin()" -ForegroundColor Blue
-    $result = [System_Utils]::Is_User_Admin()
-    if ($result) {
-        Write-Host "✅ Bạn đang chạy với quyền Admin." -ForegroundColor Green
-    } else {
-        Write-Host "⚠️ Bạn KHÔNG chạy với quyền Admin." -ForegroundColor Yellow
-    }
-}
-
-function Test_Load_Notification {
-    Write-Host "`n🧪 Testing: Load_Notification()" -ForegroundColor Blue
-    [System_Utils]::Load_Notification("Thông báo kiểu INFO", 1)
-    [System_Utils]::Load_Notification("Thông báo kiểu OK", 2)
-    [System_Utils]::Load_Notification("Thông báo kiểu ERROR", 3)
-    [System_Utils]::Load_Notification("Thông báo kiểu WARNING", 4)
-    [System_Utils]::Load_Notification("Thông báo mặc định", 99)
-}
-
-function Test_Is_Install {
-    Write-Host "`n🧪 Testing: Is_Install()" -ForegroundColor Blue
-    $existingCmds = @("powershell", "Get-Process", "Write-Host")
-    $missingCmds  = @("fakeTool_ABC", "NothingTool_999")
-
-    foreach ($cmd in $existingCmds) {
-        $result = [System_Utils]::Is_Install($cmd)
-        Write-Host "$cmd exists? $result" -ForegroundColor Cyan
-    }
-
-    foreach ($cmd in $missingCmds) {
-        $result = [System_Utils]::Is_Install($cmd)
-        Write-Host "$cmd exists? $result" -ForegroundColor Cyan
-    }
-}
-
-function Test_Load_Countdown {
-    Write-Host "`n🧪 Testing: Load_Countdown()" -ForegroundColor Blue
-    Write-Host "⏱️ Đếm ngược 3 giây..."
-    [System_Utils]::Load_Countdown(3)
-
-    Write-Host "`n⏱️ Test thời gian = 0 (bỏ qua)..."
-    [System_Utils]::Load_Countdown(0)
-
-    Write-Host "`n⏱️ Test thời gian âm..."
-    [System_Utils]::Load_Countdown(-2)
-}
-
-function Test_Create_New_Window {
-    Write-Host "`n🧪 Testing: Create_New_Window()" -ForegroundColor Blue
-
-    Write-Host "🔹 Tạo cửa sổ bình thường chạy Write-Host..."
-    [System_Utils]::Create_New_Window("Write-Host 'Cửa sổ thường OK!'", $false)
-
-    Write-Host "🔹 Tạo cửa sổ admin chạy Write-Host..."
-    [System_Utils]::Create_New_Window("Write-Host 'Admin OK!'", $true)
-
-    Write-Host "🔹 Test chuỗi rỗng..."
-    [System_Utils]::Create_New_Window("", $false)
-
-
-}
-
-function Test_Run_Admin {
-    Write-Host "`n🧪 Testing: Run_Admin()" -ForegroundColor Blue
-
-    Write-Host "🔹 Chạy lệnh Write-Host với quyền Admin..."
-    [System_Utils]::Run_Admin("Write-Host 'Chạy Admin OK'")
-
-    Write-Host "🔹 Test lệnh sai..."
-    [System_Utils]::Run_Admin("ThisIsNotAValidCommand")
-
-    Write-Host "🔹 Test chuỗi rỗng..."
-    [System_Utils]::Run_Admin("")
-}
-
-# =============================
-# RUN ALL TESTS
-# =============================
-Write-Host "🚀 BẮT ĐẦU CHẠY TOÀN BỘ TEST CHO: System_Utils" -ForegroundColor Magenta
-
-Test_Is_User_Admin
-Test_Load_Notification
-Test_Is_Install
-Test_Load_Countdown
-Test_Create_New_Window
-Test_Run_Admin
-
-Write-Host "`n✅ TOÀN BỘ TEST ĐÃ CHẠY XONG!" -ForegroundColor Green
