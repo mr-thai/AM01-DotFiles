@@ -1,0 +1,208 @@
+**********************
+PowerShell transcript start
+Start time: 20250731115650
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250731T115135\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-9748-120172.json' -FeatureFlags @() 
+Process ID: 12672
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thai-DESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Hyper-V
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Windows-Subsystem-Linux
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+[OK] ✅ Đã cài đặt: VirtualMachinePlatform
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+[OK] ✅ Đã cài đặt: Containers
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Mạng =====
+🌐 Interface:            vEthernet (Internet)
+📡 IPv4:                192.168.1.237
+🛡️  Gateway:             192.168.1.1
+🧭 DNS:                  2402:800:20ff:109c::1, 2402:800:20ff:3333::1, 2402:800:20ff:109c::1, 2402:800:20ff:3333::1, 116.97.90.124, 203.113.188.6
+
+🌐 Interface:            vEthernet (Default Switch)
+📡 IPv4:                172.24.16.1
+🛡️  Gateway:
+🧭 DNS:                  fec0:0:0:ffff::1, fec0:0:0:ffff::2, fec0:0:0:ffff::3
+
+🌐 Interface:            Ethernet
+📡 IPv4:                169.254.182.231
+🛡️  Gateway:
+🧭 DNS:                  192.168.1.1
+
+🌐 Interface:            Bluetooth Network Connection
+📡 IPv4:                169.254.55.52
+🛡️  Gateway:
+🧭 DNS:
+
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 84.76/232.06 GB (36.5% đã dùng)
+💽 Ổ đĩa D:: 142.76/244.14 GB (58.5% đã dùng)
+💽 Ổ đĩa E:: 338.98/476.92 GB (71.1% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:              8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+[ERROR] ❌ Không thể lấy thông tin GPU!
+**********************
+PowerShell transcript end
+End time: 20250731115705
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250731174101
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250731T115135\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-9748-120172.json' -FeatureFlags @() 
+Process ID: 12672
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[INFO] 🔧 Đang chạy script tối ưu hệ thống từ Christitus...
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thai-DESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Hyper-V
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Windows-Subsystem-Linux
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+[OK] ✅ Đã cài đặt: VirtualMachinePlatform
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+[OK] ✅ Đã cài đặt: Containers
+[ERROR] ❌ Lỗi khi xử lý công cụ Office : Method invocation failed because [System.Object[]] does not contain a method named 'Config'.
+[LOG] ✅ Visual C++ Redistributable đã tồn tại. Bỏ qua cài đặt.
+[INFO] ⏲️ Múi giờ đã là SE Asia Standard Time, không cần thay đổi.
+PS>TerminatingError(New-Item): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: An item with the specified name D:\OneDrive - vinhuni.edu.vn\Máy tính(1)\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C} already exists."
+[ERROR] Không thể tạo GodMode: An item with the specified name D:\OneDrive - vinhuni.edu.vn\Máy tính(1)\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C} already exists.
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-ac 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-ac 0
+[OK] 🔧 Đã dừng tắt màn hình
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarDa -Value 0
+✅ Đã ẩn Widgets khỏi Taskbar.
+[INFO] 🌑 Đang bật Dark Mode cho hệ thống và ứng dụng...
+[OK] ✅ Đã bật chế độ Dark Mode thành công!
+[INFO] 📐 Đang thiết lập Taskbar tự động ẩn...
+[OK] ✅ Taskbar đã được thiết lập tự động ẩn.
+show: D:\Dev\AM01-DotFiles\Windows\Main.ps1:785:9
+Line |
+ 785 |          show info
+     |          ~~~~
+     | The term 'show' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+show: D:\Dev\AM01-DotFiles\Windows\Main.ps1:785:9
+Line |
+ 785 |          show info
+     |          ~~~~
+     | The term 'show' is not recognized as a name of a cmdlet, function, script file, or executable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[ERROR] ❌ Lỗi khi xử lý công cụ Office : Method invocation failed because [System.Object[]] does not contain a method named 'Config'.
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[ERROR] ❌ Lỗi khi xử lý công cụ Office : Method invocation failed because [System.Object[]] does not contain a method named 'Config'.
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Write-Warning"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Write-Warning                                      7.0.0.0    Microsoft.PowerShell.Utility
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Write-Warning"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Write-Warning
+
+SYNTAX
+    Write-Warning [-Message] <string> [<CommonParameters>]
+
+
+ALIASES
+    None
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Write-Warning -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkID=2097044.
+
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[ERROR] ❌ Lỗi khi xử lý công cụ WSL : Method invocation failed because [System.Object[]] does not contain a method named 'Config'.
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B

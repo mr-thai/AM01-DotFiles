@@ -165,18 +165,12 @@ class Windows_Features : Packages_Manager {
     }
     static [void] Install_Packages ([string[]]$Ten) {
         foreach ($feature in $Ten) {
-            if (-not [Windows_Features]::Check_Package($feature)) {
                 [System_Utils]::Run_Admin("Enable-WindowsOptionalFeature -Online -FeatureName $feature -All -NoRestart")
                 [System_Utils]::Load_Notification("✅ Đã cài đặt: $feature", 2)
-            } else {
-                [System_Utils]::Load_Notification("✅ $feature đã được cài đặt.", 2)
-            }
         }
     }
     static [bool] Check_Package([string]$Ten) {
-        $installed = Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq $Ten }
-        if (-not $installed) { return $false }
-        return $installed.State -eq "Enabled"
+        return $false
     }
 }
 #endregion
@@ -201,7 +195,7 @@ class Git : Tools_Manager {
         [git]::Configure_git()
     }
     static [void] Configure_git () {
-        $Name = "Mr.thai" + $env:COMPUTERNAME
+        $Name = "Mr.thai-" + $env:COMPUTERNAME
         $Email = "mr.thai2k5@gmail.com"
         try {
             git config --global user.name  $Name
@@ -291,165 +285,135 @@ class Docker : Tools_Manager {
         }
     }
     static [void] Config () {
-
     }
 }
 class VisualStudio : Tools_Manager{
     static [void] Install () {
-
+        if (-not [System_Utils]::Is_Install("Microsoft.VisualStudio.2022.Community.Preview")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt Visual Studio...", 1)
+            winget install Microsoft.VisualStudio.2022.Community.Preview -e --accept-source-agreements --accept-package-agreements
+            [System_Utils]::Load_Notification("Visual studio đã được cài đặt thành công!", 2)
+        }
     }
     static [void] Config () {
-
+        # cài winform và các mhoms thiết lập cần thiết
     }
 }
 class AndroidStudio : Tools_Manager{
     static [void] Install () {
-
+        if (-not [System_Utils]::Is_Install("android-studio")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt Android Studio...", 1)
+            scoop install extras/android-studio
+            [System_Utils]::Load_Notification("Android Studio đã được cài đặt thành công!", 2)
+        }
     }
     static [void] Config () {
+    }
+}
+class Office : Tools_Manager {
+    static [void] Install () {
+        if (-not [System_Utils]::Is_Install("Office")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt Office...", 1)
+            winget install Microsoft.Office -e --accept-source-agreements --accept-package-agreements
+            [System_Utils]::Load_Notification("Office đã được cài đặt thành công!", 2)
+        }
+    }
+    static [void] Config () {
+        [Office]::Activate_KMS_All()
+    }
+    
+    static [void] Activate_KMS_All() {
+        $url = "irm https://get.activated.win | iex"
+        [System_Utils]::Create_New_Window($url, $true)
+    }
+}
+class WSL : Tools_Manager {
+    static [void] Install () {
+      
+    }
 
+    static [void] Config () {
+       
     }
 }
 class LazyVim : Tools_Manager {
     static [void] Install () {
         [LazyVim]::Install_NVim()
-        [LazyVim]::Install_Nerd_Fonts()
+        [LazyVim]::Install_Fonts("Mesloo", "v3.4.0")
         [LazyVim]::Install_LazyVim()
         [LazyVim]::Install_Packages()
-        [LazyVim]::Auto_Download_Plugin_Lazyvim()
+        [LazyVim]::Sync_Plugin()
         [System_Utils]::Load_Notification("🎉 LazyVim đã được cài đặt thành công!", 2)
     }
+
     static [void] Config () {
         [System_Utils]::Load_Notification("⚙️ LazyVim đã sẵn sàng để sử dụng.", 2)
     }
+
     static [void] Install_NVim () {
         if (-not [System_Utils]::Is_Install("nvim")) {
-            [System_Utils]::Load_Notification("🔧 Đang cài đặt Neovim...", 1)
+            [System_Utils]::Load_Notification("🔧 Đang cài Neovim...", 1)
             [Scoop]::Install_Packages("neovim")
+            [System_Utils]::Load_Notification("✅ Neovim đã được cài đặt!", 2)
         }
     }
-    static [void] Install_Nerd_Fonts () {
-        $fontName = "Meslo"
-        $version = "v3.2.0"
+
+    static [void] Install_Fonts ([string]$fontName, [string]$version) {
         $url = "https://github.com/ryanoasis/nerd-fonts/releases/download/$version/$fontName.zip"
-        $tempFolder = "$env:TEMP\NerdFonts"
-        $zipPath = "$tempFolder\$fontName.zip"
-        $extractPath = "$tempFolder\Extracted"
+        $tempDir = "$env:TEMP\NerdFonts"
+        $extractPath = "$tempDir\Extracted"
+        $fontsPath = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
 
-        [System_Utils]::Load_Notification("📥 Đang tải font $fontName ($version)...", 1)
-
-        if (-Not (Test-Path $tempFolder)) {
-            New-Item -ItemType Directory -Path $tempFolder | Out-Null
-        }
+        Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+        New-Item -Path $extractPath -ItemType Directory -Force | Out-Null
 
         try {
-            Invoke-WebRequest -Uri $url -OutFile $zipPath -UseBasicParsing -ErrorAction Stop
-        } catch {
-            [System_Utils]::Load_Notification("Lỗi khi tải font: $_", 3)
-            return
-        }
+            Invoke-WebRequest $url -OutFile "$tempDir\$fontName.zip" -UseBasicParsing -ErrorAction Stop
+            Expand-Archive "$tempDir\$fontName.zip" -DestinationPath $extractPath -Force
 
-        try {
-            if (Test-Path $extractPath) {
-                Remove-Item -Recurse -Force $extractPath
+            Get-ChildItem -Path $extractPath -Filter *.ttf | ForEach-Object {
+                Copy-Item $_.FullName -Destination "$fontsPath\$($_.Name)" -Force
+                Write-Host "✅ Font: $($_.Name)"
             }
-            Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
+
+            [System_Utils]::Load_Notification("✅ Font $fontName đã được cài đặt!", 2)
         } catch {
-            [System_Utils]::Load_Notification("Lỗi khi giải nén font: $_", 3)
-            return
+            [System_Utils]::Load_Notification("❌ Lỗi font: $($_.Exception.Message)", 3)
         }
-
-        $fontsFolder = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
-        if (-Not (Test-Path $fontsFolder)) {
-            New-Item -ItemType Directory -Path $fontsFolder | Out-Null
-        }
-
-        $fontsInstalled = 0
-        Get-ChildItem -Path $extractPath -Filter *.ttf | ForEach-Object {
-            $targetPath = Join-Path $fontsFolder $_.Name
-            try {
-                Copy-Item $_.FullName -Destination $targetPath -Force
-                $fontsInstalled++
-                [System_Utils]::Load_Notification("✅ Đã cài: $($_.Name)", 2)
-            } catch {
-                Write-Host "⚠️ Không thể cài font: $($_.Name)"
-            }
-        }
-
-        if ($fontsInstalled -gt 0) {
-            [System_Utils]::Load_Notification("🎉 Cài đặt font $fontName thành công!", 2)
-        } else {
-            [System_Utils]::Load_Notification("⚠️ Không cài được font nào.", 2)
-        }
-
-        Remove-Item -Recurse -Force $extractPath, $zipPath
     }
+
     static [void] Install_LazyVim () {
-        [System_Utils]::Load_Notification("🔧 Đang clone LazyVim từ GitHub...", 1)
-        git clone https://github.com/LazyVim/starter $env:LOCALAPPDATA\nvim
-        Remove-Item "$env:LOCALAPPDATA\nvim\.git" -Recurse -Force
-    }
-    static [void] Install_Packages () {
-        $packages = @(
-            "curl", "wget", "gcc", "make", "unzip", "ripgrep", "fd", 
-            "llvm", "zig", "python", "nodejs-lts"
-        )
+        $nvimPath = "$env:LOCALAPPDATA\nvim"
+        if (Test-Path $nvimPath) { Remove-Item $nvimPath -Recurse -Force }
+        [System_Utils]::Load_Notification("🌀 Đang clone LazyVim config...", 1)
 
-        foreach ($pkg in $packages) {
-            if (-not [System_Utils]::Is_Install($pkg)) {
-                Write-Host "📦 Đang cài: $pkg"
-                [Scoop]::Install_Packages($pkg)
+        git clone https://github.com/LazyVim/starter $nvimPath
+        Remove-Item "$nvimPath\.git" -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    static [void] Install_Packages () {
+        $pkgs = @("curl", "wget", "gcc", "make", "unzip", "ripgrep", "fd", "llvm", "zig")
+        foreach ($p in $pkgs) {
+            if (-not [System_Utils]::Is_Install($p)) {
+                Write-Host "📦 Cài package: $p..."
+                [Scoop]::Install_Packages($p)
             }
         }
+    }
 
-        [System_Utils]::Load_Notification("🔧 Đang cài pip & npm packages...", 1)
-        python -m pip install --upgrade pip pynvim
-        npm install -g typescript typescript-language-server vscode-langservers-extracted eslint_d
-        [System_Utils]::Load_Notification("✅ Đã cài đặt đầy đủ các gói!", 2)
-    }
-    static [void] Auto_Download_Plugin_Lazyvim () {
-        [System_Utils]::Load_Notification("⚙️ Đồng bộ plugin LazyVim...", 1)
-        nvim --headless "+Lazy! sync" +qa
-    }
-}
-class WSL : Tools_Manager {
-    static [void] Install () {
-        if (-not [System_Utils]::Is_Install("wsl")) {
-            [System_Utils]::Load_Notification("Hệ thống không hỗ trợ WSL hoặc chưa có WSL!", 3)
-            return
-        }
-        [System_Utils]::Load_Notification("🔧 Đang kiểm tra/cài đặt WSL kernel...", 1)
+    static [void] Sync_Plugin () {
+        [System_Utils]::Load_Notification("🔁 Đồng bộ plugin LazyVim...", 1)
         try {
-            wsl --status *>$null
-            [System_Utils]::Run_Admin("wsl --update")
+            nvim --headless "+qall"
+            nvim --headless "+Lazy! sync" +qa
+            [System_Utils]::Load_Notification("✅ Đã đồng bộ plugin LazyVim", 2)
         } catch {
-            [System_Utils]::Run_Admin("wsl --install --no-launch --web-download")
+            [System_Utils]::Load_Notification("⚠️ Lỗi khi sync plugin: $($_.Exception.Message)", 3)
         }
-        [System_Utils]::Load_Notification("✅ WSL đã được cài đặt hoặc cập nhật thành công.", 2)
-    }
-    static [void] Config () {
-        [System_Utils]::Load_Notification("⚙️ Đang cấu hình WSL sau cài đặt...", 1)
-        $hasUbuntu = (& wsl -l -q) -match "^Ubuntu"
-        if (-not $hasUbuntu) {
-            [System_Utils]::Run_Admin("wsl --install -d Ubuntu-22.04 --no-launch")
-        } else {
-            [System_Utils]::Load_Notification("✅ Ubuntu đã tồn tại trong WSL.", 2)
-        }
-
-        # Cài Ubuntu từ Store nếu chưa có
-        [Winget]::Install_Packages("9PN20MSR04DW")
-
-        [System_Utils]::Load_Notification("✅ Cấu hình WSL hoàn tất! Hãy khởi động lại nếu cần.", 2)
     }
 }
-class Office : Tools_Manager {
-    static [void] Install () {
 
-    }
-    static [void] Config () {
-        [Setup_Win]::Activate_KMS_All()
-    }
-}
+
 #endregion
 #region thiết lập Windows
 class Setup_Win {
@@ -476,30 +440,6 @@ class Setup_Win {
             [System_Utils]::Load_Notification("✅ Đã đặt múi giờ thành công.", 2)
         } catch {
             [System_Utils]::Load_Notification("Lỗi khi đặt múi giờ: $($_.Exception.Message)", 3)
-        }
-    }
-    static [void] Activate_KMS_All() {
-        $url = "https://get.activated.win"
-        $scriptPath = "$env:TEMP\MAS_AIO.cmd"
-        $args = "/K-WindowsOffice /K-NoEditionChange /K-NoRenewalTask /S"
-
-        try {
-            [System_Utils]::Load_Notification("🌐 Đang tải script kích hoạt từ $url...", 1)
-
-            # Nếu file đã tồn tại, xóa trước để tránh lỗi
-            if (Test-Path $scriptPath) {
-                Remove-Item $scriptPath -Force -ErrorAction SilentlyContinue
-            }
-
-            Invoke-WebRequest -Uri $url -OutFile $scriptPath -UseBasicParsing
-            [System_Utils]::Load_Notification("✅ Đã tải script về: $scriptPath", 2)
-
-            # Chạy script với quyền Admin và tham số dòng lệnh
-            Start-Process -FilePath $scriptPath -ArgumentList $args -Verb RunAs
-            [System_Utils]::Load_Notification("🚀 Đang kích hoạt Windows + Office bằng Online KMS...", 1)
-            [System_Utils]::Load_Notification("📌 Tham số: $args", 4)
-        } catch {
-            [System_Utils]::Load_Notification("Lỗi khi tải hoặc chạy script: $($_.Exception.Message)", 3)
         }
     }
     static [void] Install_VC_AllInOne() {
@@ -577,10 +517,8 @@ class Setup_Win {
         [System_Utils]::Load_Notification("🔧 Đã dừng tắt màn hình", 2)
     }
     static [void] Hide_Widgets () {
-        $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-        $propertyName = "TaskbarDa"
         try {
-            Set-ItemProperty -Path $registryPath -Name $propertyName -Value 0
+            [System_Utils]::Run_Admin("Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name TaskbarDa -Value 0")
             Write-Host "✅ Đã ẩn Widgets khỏi Taskbar." -ForegroundColor Green
             Stop-Process -Name explorer -Force
             Start-Process explorer
@@ -629,53 +567,98 @@ class Setup_Win {
 }
 #endregion
 #region hiển thị thông tin hệ thống
-Class Show_Info {
+class Show_Info {
+
+    static [void] Show_OS_Info() {
+        $os = Get-CimInstance Win32_OperatingSystem
+        $arch = (Get-CimInstance Win32_Processor).AddressWidth
+        [System_Utils]::Load_Notification("===== Thông tin Hệ điều hành =====", 1)
+        Write-Host "🪟 Tên hệ điều hành:     $($os.Caption)"
+        Write-Host "🏗️  Version:             $($os.Version) (Build $($os.BuildNumber))"
+        Write-Host "🏁 Kiến trúc:            $arch-bit"
+    }
+
+
     static [void] Show_RAM_Info() {
-        $maxRamKB = (Get-CimInstance Win32_PhysicalMemoryArray).MaxCapacity
-        $maxRamGB = [math]::Round($maxRamKB / 1MB)
-        $ramModules = Get-CimInstance Win32_PhysicalMemory
-        $currentRamBytes = ($ramModules | Measure-Object -Property Capacity -Sum).Sum
-        $currentRamGB = [math]::Round($currentRamBytes / 1GB)
-        $slotsUsed = $ramModules.Count
-        $totalSlots = (Get-CimInstance Win32_PhysicalMemoryArray).MemoryDevices
-        Write-Host "`n===== Thông tin RAM =====" -ForegroundColor Cyan
-        Write-Host "💾 RAM đang dùng:         $currentRamGB GB"
-        Write-Host "🚀 RAM tối đa hỗ trợ:     $maxRamGB GB"
-        Write-Host "🔌 Số khe đã cắm:         $slotsUsed"
-        Write-Host "📦 Tổng số khe:           $totalSlots"
-    }
-    static [void] Show_CPU_Info() {
-        $cpu = Get-CimInstance Win32_Processor
-        Write-Host "`n===== Thông tin CPU =====" -ForegroundColor Cyan
-        Write-Host "🖥️ Tên CPU:               $($cpu.Name)"
-        Write-Host "⚙️ Số lõi:                $($cpu.NumberOfCores)"
-        Write-Host "🔢 Số luồng:              $($cpu.NumberOfLogicalProcessors)"
-        Write-Host "⏱️ Tốc độ cơ bản:         $([math]::Round($cpu.MaxClockSpeed / 1000, 2)) GHz"
-    }
-    static [void] Show_GPU_Info() {
-        $gpu = Get-CimInstance Win32_VideoController
-        Write-Host "`n===== Thông tin GPU =====" -ForegroundColor Cyan
-        Write-Host "🎮 Tên GPU:               $($gpu.Name)"
-        Write-Host "🖥️ Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
-        Write-Host "🔄 Phiên bản driver:      $($gpu.DriverVersion)"
-    }
-    static [void] Show_Disk_Info() {
-        $drives = Get-CimInstance Win32_LogicalDisk -Filter "DriveType = 3"
-        Write-Host "`n===== Thông tin Ổ cứng =====" -ForegroundColor Cyan
-        foreach ($drive in $drives) {
-            $used = [math]::Round(($drive.Size - $drive.FreeSpace)/1GB, 2)
-            $total = [math]::Round($drive.Size / 1GB, 2)
-            $percent = [math]::Round($used / $total * 100, 1)
-            Write-Host "💽 Ổ đĩa $($drive.DeviceID): $used/$total GB ($percent% đã dùng)"
+        try {
+            $maxRamKB = (Get-CimInstance Win32_PhysicalMemoryArray).MaxCapacity
+            $maxRamGB = [math]::Round($maxRamKB / 1MB)
+            $ramModules = Get-CimInstance Win32_PhysicalMemory
+            $currentRamBytes = ($ramModules | Measure-Object -Property Capacity -Sum).Sum
+            $currentRamGB = [math]::Round($currentRamBytes / 1GB)
+            $slotsUsed = $ramModules.Count
+            $totalSlots = (Get-CimInstance Win32_PhysicalMemoryArray).MemoryDevices
+
+            [System_Utils]::Load_Notification("===== Thông tin RAM =====", 1)
+            Write-Host "💾 RAM đang dùng:         $currentRamGB GB"
+            Write-Host "🚀 RAM tối đa hỗ trợ:     $maxRamGB GB"
+            Write-Host "🔌 Số khe đã cắm:         $slotsUsed"
+            Write-Host "📦 Tổng số khe:           $totalSlots"
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không thể lấy thông tin RAM!", 3)
         }
     }
-    static [void] Show_All (){
-        [Show_Info]::Show_Disk_Info();
-        [Show_Info]::Show_RAM_Info();
-        [Show_Info]::Show_CPU_Info();
-        [Show_Info]::Show_GPU_Info();
+    static [void] Show_CPU_Info() {
+        try {
+            $cpu = Get-CimInstance Win32_Processor
+            if (-not $cpu) {
+                [System_Utils]::Load_Notification("⚠️ Không phát hiện CPU!", 3)
+                return
+            }
+            [System_Utils]::Load_Notification("===== Thông tin CPU =====", 1)
+            Write-Host "🖥️ Tên CPU:               $($cpu.Name)"
+            Write-Host "⚙️ Số lõi:                $($cpu.NumberOfCores)"
+            Write-Host "🔢 Số luồng:             $($cpu.NumberOfLogicalProcessors)"
+            Write-Host "⏱️ Tốc độ cơ bản:         $([math]::Round($cpu.MaxClockSpeed / 1000, 2)) GHz"
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không thể lấy thông tin CPU!", 3)
+        }
+    }
+
+    static [void] Show_GPU_Info() {
+        try {
+            $gpu = Get-CimInstance Win32_VideoController
+            if (-not $gpu) {
+                [System_Utils]::Load_Notification("⚠️ Không phát hiện GPU!", 3)
+                return
+            }
+            [System_Utils]::Load_Notification("===== Thông tin GPU =====", 1)
+            Write-Host "🎮 Tên GPU:               $($gpu.Name)"
+            Write-Host "🖥️ Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
+            Write-Host "🔄 Phiên bản driver:      $($gpu.DriverVersion)"
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không thể lấy thông tin GPU!", 3)
+        }
+    }
+
+    static [void] Show_Disk_Info() {
+        try {
+            $drives = Get-CimInstance Win32_LogicalDisk -Filter "DriveType = 3"
+            if (-not $drives) {
+                [System_Utils]::Load_Notification("⚠️ Không phát hiện ổ đĩa!", 3)
+                return
+            }
+            [System_Utils]::Load_Notification("===== Thông tin Ổ cứng =====", 1)
+            foreach ($drive in $drives) {
+                $used = [math]::Round(($drive.Size - $drive.FreeSpace)/1GB, 2)
+                $total = [math]::Round($drive.Size / 1GB, 2)
+                $percent = [math]::Round($used / $total * 100, 1)
+                Write-Host "💽 Ổ đĩa $($drive.DeviceID): $used/$total GB ($percent% đã dùng)"
+            }
+        } catch {
+            [System_Utils]::Load_Notification("❌ Không thể lấy thông tin ổ đĩa!", 3)
+        }
+    }
+
+    static [void] Show_All () {
+        [Show_Info]::Show_OS_Info()
+        [Show_Info]::Show_Disk_Info()
+        [Show_Info]::Show_RAM_Info()
+        [Show_Info]::Show_CPU_Info()
+        [Show_Info]::Show_GPU_Info()
     }
 }
+
 #endregion
 #region menu chính
 class Main {
@@ -691,51 +674,53 @@ class Main {
 
     }
     static [void] start (){
-        # initial setup
-        [Setup_Win]::Disable_UAC()
-        [System_Utils]::Check_Internet()
-        $Buckets_Scoop = @("extras", "versions", "main")
-        [Scoop]::Install(); [Scoop]::Install_Bucket($Buckets_Scoop);
-        [git]::Install();[git]::Config()
-        $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
-        [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
-        # Setup tools
-        $Packages_Scoop = @("extras/winrar")
-        [Scoop]::Install_Packages($Packages_Scoop)
-        $Packages_Winget = @("DucFabulous.UltraViewer","Microsoft.VisualStudio.2022.Community.Preview","Microsoft.Office")
-        [Winget]::Install_Packages($Packages_Winget)
-        $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
-        foreach ($tool in $Setup_Tools) {
+        # [Setup_Win]::Disable_UAC()
+        # [System_Utils]::Check_Internet()
+        # [Setup_Win]::RunChristitus()
+        # $Buckets_Scoop = @("extras", "versions", "main")
+        # [Scoop]::Install();
+        # [git]::Install();[git]::Config()
+        # [Scoop]::Install_Bucket($Buckets_Scoop);
+        # $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
+        # [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
+        # $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
+        $Setup_Tools = @("LazyVim")
+        foreach ($ToolName in $Setup_Tools) {
             try {
-                $type = [AppDomain]::CurrentDomain.GetAssemblies().GetTypes() | Where-Object { $_.Name -eq $tool }
+                $type = [Type]::GetType($ToolName, $false)
                 if ($null -eq $type) {
-                    [System_Utils]::Load_Notification("Không tìm thấy class $tool", 3)
-                    continue
+                    $type = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
+                        $_.GetType($ToolName, $false)
+                    } | Where-Object { $_ -ne $null }
                 }
-                if ($type.GetMethod("Install")) {
+
+                if ($null -ne $type) {
                     $type::Install()
-                }
-                if ($type.GetMethod("Config")) {
                     $type::Config()
+                } else {
+                    [System_Utils]::Load_Notification("❌ Không tìm thấy class: $ToolName", 3)
                 }
             } catch {
-                $msg = "Lỗi khi xử lý công cụ $tool : $($_.Exception.Message)"
-                [System_Utils]::Load_Notification($msg, 3)
+                [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
             }
         }
-        # setup win    
-        [Setup_Win]::RunChristitus()
-        [Setup_Win]::Install_VC_AllInOne()
-        [Setup_Win]::Set_TimeZone_UTC8()
-        [Setup_Win]::Create_GodMode()
-        [Setup_Win]::Always_keep_the_screen()
-        [Setup_Win]::Hide_Widgets()
-        [Setup_Win]::Set_DarkMode()
-        [Setup_Win]::Auto_Hide_Taskbar()
-        # show info
-        [Show_Info]::Show_All()
+        # $Packages_Scoop = @("extras/winrar")
+        # [Scoop]::Install_Packages($Packages_Scoop)
+        # $Packages_Winget = @("DucFabulous.UltraViewer")
+        # [Winget]::Install_Packages($Packages_Winget)
+
+        # [Setup_Win]::Install_VC_AllInOne()
+        # [Setup_Win]::Set_TimeZone_UTC8()
+        # [Setup_Win]::Create_GodMode()
+        # [Setup_Win]::Always_keep_the_screen()
+        # [Setup_Win]::Hide_Widgets()
+        # [Setup_Win]::Set_DarkMode()
+        # [Setup_Win]::Auto_Hide_Taskbar()
+        # [Show_Info]::Show_All()
     }
 }
 #endregion
 # Khối script chính
-# [Main]::MainStart()
+[Main]::MainStart()
+
+# crack idm

@@ -1,0 +1,607 @@
+**********************
+PowerShell transcript start
+Start time: 20250730213807
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250730T154949\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-8756-801578.json' -FeatureFlags @() 
+Process ID: 20180
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thaiDESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+PS>TerminatingError(Get-WindowsOptionalFeature): "The requested operation requires elevation.
+"
+Get-WindowsOptionalFeature: D:\Dev\AM01-DotFiles\Windows\Main.ps1:177:22
+Line |
+ 177 |          $installed = Get-WindowsOptionalFeature -Online | Where-Objec …
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The requested operation requires elevation.
+Get-WindowsOptionalFeature: D:\Dev\AM01-DotFiles\Windows\Main.ps1:177:22
+Line |
+ 177 |          $installed = Get-WindowsOptionalFeature -Online | Where-Objec …
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The requested operation requires elevation. 
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Get-WindowsOptionalFeature"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Get-WindowsOptionalFeature                         3.0        Dism
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Get-WindowsOptionalFeature"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Get-WindowsOptionalFeature
+
+SYNTAX
+    Get-WindowsOptionalFeature -Path <string> [-FeatureName <string>] [-PackageName <string>] [-PackagePath <string>] [-WindowsDirectory <string>] [-SystemDrive <string>] [-LogPath <string>]
+    [-ScratchDirectory <string>] [-LogLevel {Errors | Warnings | WarningsInfo | Debug}] [<CommonParameters>]
+
+    Get-WindowsOptionalFeature -Online [-FeatureName <string>] [-PackageName <string>] [-PackagePath <string>] [-WindowsDirectory <string>] [-SystemDrive <string>] [-LogPath <string>]
+    [-ScratchDirectory <string>] [-LogLevel {Errors | Warnings | WarningsInfo | Debug}] [<CommonParameters>]
+
+
+ALIASES
+    None
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Get-WindowsOptionalFeature -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkId=289358.
+
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thaiDESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+PS>TerminatingError(Get-WindowsOptionalFeature): "The requested operation requires elevation.
+"
+Get-WindowsOptionalFeature: D:\Dev\AM01-DotFiles\Windows\Main.ps1:177:22
+Line |
+ 177 |          $installed = Get-WindowsOptionalFeature -Online | Where-Objec …
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The requested operation requires elevation.
+Get-WindowsOptionalFeature: D:\Dev\AM01-DotFiles\Windows\Main.ps1:177:22
+Line |
+ 177 |          $installed = Get-WindowsOptionalFeature -Online | Where-Objec …
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The requested operation requires elevation. 
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="$Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq $Ten }"
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="$Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq $Ten }"
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="."
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thaiDESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Hyper-V
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Windows-Subsystem-Linux
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+[OK] ✅ Đã cài đặt: VirtualMachinePlatform
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+[OK] ✅ Đã cài đặt: Containers
+[ERROR] Lỗi khi xử lý công cụ Vscode : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ Obsidian : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ ObsStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ Idm : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ WSL : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ Docker : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ VisualStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ AndroidStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ LazyVim : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] Lỗi khi xử lý công cụ Office : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+Installed apps:
+[INFO] Đang cài đặt: extras/winrar
+Updating Scoop...
+Updating Buckets...
+Scoop was updated successfully!
+WARN  'winrar' (7.12) is already installed.
+Use 'scoop update winrar' to install a new version.
+[ERROR] DucFabulous.UltraViewer chưa được cài đặt hoặc không có trong PATH.
+[INFO] Cài đặt: DucFabulous.UltraViewer
+[INFO] 🔧 Đang chạy script tối ưu hệ thống từ Christitus...
+[LOG] ✅ Visual C++ Redistributable đã tồn tại. Bỏ qua cài đặt.
+[INFO] ⏲️ Múi giờ đã là SE Asia Standard Time, không cần thay đổi.
+[OK] ✅ GodMode đã được tạo tại: D:\OneDrive - vinhuni.edu.vn\Máy tính(1)\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-ac 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-ac 0
+[OK] 🔧 Đã dừng tắt màn hình
+Set-ItemProperty: D:\Dev\AM01-DotFiles\Windows\Main.ps1:590:13
+Line |
+ 590 |              Set-ItemProperty -Path $registryPath -Name $propertyName  …
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Attempted to perform an unauthorized operation.
+Set-ItemProperty: D:\Dev\AM01-DotFiles\Windows\Main.ps1:590:13
+Line |
+ 590 |              Set-ItemProperty -Path $registryPath -Name $propertyName  …
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Attempted to perform an unauthorized operation.
+
+✅ Đã ẩn Widgets khỏi Taskbar.
+[INFO] 🌑 Đang bật Dark Mode cho hệ thống và ứng dụng...
+[OK] ✅ Đã bật chế độ Dark Mode thành công!
+[INFO] 📐 Đang thiết lập Taskbar tự động ẩn...
+[OK] ✅ Taskbar đã được thiết lập tự động ẩn.
+
+===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 77.37/232.06 GB (33.3% đã dùng)
+💽 Ổ đĩa D:: 152.04/244.14 GB (62.3% đã dùng)
+💽 Ổ đĩa E:: 338.98/476.92 GB (71.1% đã dùng)
+
+===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+
+===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:              8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+
+===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630
+🖥️ Bộ nhớ GPU:            1 GB
+🔄 Phiên bản driver:      26.20.100.8141
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="vds.exe"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Application     vds.exe                                            10.0.2610… C:\WINDOWS\system32\vds.exe
+
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Where-Object"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Where-Object                                       7.5.0.500  Microsoft.PowerShell.Core
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Where-Object"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Where-Object
+
+SYNTAX
+    Where-Object [-Property] <string> [[-Value] <Object>] [-InputObject <psobject>] [-EQ] [<CommonParameters>]
+
+    Where-Object [-FilterScript] <scriptblock> [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CEQ [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -NE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CNE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -GT [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CGT [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -LT [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CLT [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -GE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CGE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -LE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CLE [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -Like [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CLike [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -NotLike [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CNotLike [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -Match [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CMatch [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -NotMatch [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CNotMatch [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -Contains [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CContains [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -NotContains [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CNotContains [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -In [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CIn [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -NotIn [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -CNotIn [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -Is [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> [[-Value] <Object>] -IsNot [-InputObject <psobject>] [<CommonParameters>]
+
+    Where-Object [-Property] <string> -Not [-InputObject <psobject>] [<CommonParameters>]
+
+
+ALIASES
+    where
+    ?
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Where-Object -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkID=2096806.
+
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Windows\Main.ps1'
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thaiDESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Hyper-V
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Windows-Subsystem-Linux
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+[OK] ✅ Đã cài đặt: VirtualMachinePlatform
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+[OK] ✅ Đã cài đặt: Containers
+[ERROR] ❌ Lỗi khi xử lý công cụ Vscode : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ Obsidian : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ ObsStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ Idm : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ WSL : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ Docker : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ VisualStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ AndroidStudio : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ LazyVim : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+[ERROR] ❌ Lỗi khi xử lý công cụ Office : Method invocation failed because [System.Object[]] does not contain a method named 'Install'.
+Installed apps:
+[INFO] Đang cài đặt: extras/winrar
+WARN  'winrar' (7.12) is already installed.
+Use 'scoop update winrar' to install a new version.
+[ERROR] DucFabulous.UltraViewer chưa được cài đặt hoặc không có trong PATH.
+[INFO] Cài đặt: DucFabulous.UltraViewer
+[INFO] 🔧 Đang chạy script tối ưu hệ thống từ Christitus...
+[LOG] ✅ Visual C++ Redistributable đã tồn tại. Bỏ qua cài đặt.
+[INFO] ⏲️ Múi giờ đã là SE Asia Standard Time, không cần thay đổi.
+PS>TerminatingError(New-Item): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: An item with the specified name D:\OneDrive - vinhuni.edu.vn\Máy tính(1)\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C} already exists."
+[ERROR] Không thể tạo GodMode: An item with the specified name D:\OneDrive - vinhuni.edu.vn\Máy tính(1)\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C} already exists.
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-dc 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change standby-timeout-ac 0
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: powercfg /change monitor-timeout-ac 0
+[OK] 🔧 Đã dừng tắt màn hình
+Set-ItemProperty: D:\Dev\AM01-DotFiles\Windows\Main.ps1:590:13
+Line |
+ 590 |              Set-ItemProperty -Path $registryPath -Name $propertyName  …
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Attempted to perform an unauthorized operation.
+Set-ItemProperty: D:\Dev\AM01-DotFiles\Windows\Main.ps1:590:13
+Line |
+ 590 |              Set-ItemProperty -Path $registryPath -Name $propertyName  …
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Attempted to perform an unauthorized operation.
+
+✅ Đã ẩn Widgets khỏi Taskbar.
+[INFO] 🌑 Đang bật Dark Mode cho hệ thống và ứng dụng...
+[OK] ✅ Đã bật chế độ Dark Mode thành công!
+[INFO] 📐 Đang thiết lập Taskbar tự động ẩn...
+[OK] ✅ Taskbar đã được thiết lập tự động ẩn.
+
+===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 77.5/232.06 GB (33.4% đã dùng)
+💽 Ổ đĩa D:: 152.04/244.14 GB (62.3% đã dùng)
+💽 Ổ đĩa E:: 338.98/476.92 GB (71.1% đã dùng)
+
+===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+
+===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:              8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+
+===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630
+🖥️ Bộ nhớ GPU:            1 GB
+🔄 Phiên bản driver:      26.20.100.8141
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Start-Process"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Start-Process                                      7.0.0.0    Microsoft.PowerShell.Management
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Start-Process"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Start-Process
+
+SYNTAX
+    Start-Process [-FilePath] <string> [[-ArgumentList] <string[]>] [-Credential <pscredential>] [-WorkingDirectory <string>] [-LoadUserProfile] [-NoNewWindow] [-PassThru] [-RedirectStandardError
+    <string>] [-RedirectStandardInput <string>] [-RedirectStandardOutput <string>] [-WindowStyle {Normal | Hidden | Minimized | Maximized}] [-Wait] [-UseNewEnvironment] [-Environment <hashtable>]
+    [-WhatIf] [-Confirm] [<CommonParameters>]
+
+    Start-Process [-FilePath] <string> [[-ArgumentList] <string[]>] [-WorkingDirectory <string>] [-PassThru] [-Verb <string>] [-WindowStyle {Normal | Hidden | Minimized | Maximized}] [-Wait]
+    [-Environment <hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+
+ALIASES
+    saps
+    start
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Start-Process -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkID=2097141.
+
+
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Write-Host"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Write-Host                                         7.0.0.0    Microsoft.PowerShell.Utility
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Write-Host"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Write-Host
+
+SYNTAX
+    Write-Host [[-Object] <Object>] [-NoNewline] [-Separator <Object>] [-ForegroundColor {Black | DarkBlue | DarkGreen | DarkCyan | DarkRed | DarkMagenta | DarkYellow | Gray | DarkGray | Blue | Green
+    | Cyan | Red | Magenta | Yellow | White}] [-BackgroundColor {Black | DarkBlue | DarkGreen | DarkCyan | DarkRed | DarkMagenta | DarkYellow | Gray | DarkGray | Blue | Green | Cyan | Red | Magenta |
+    Yellow | White}] [<CommonParameters>]
+
+
+ALIASES
+    None
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Write-Host -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkID=2097137.
+
+
+PS>CommandInvocation(Get-Command): "Get-Command"
+>> ParameterBinding(Get-Command): name="ErrorAction"; value="Ignore"
+>> ParameterBinding(Get-Command): name="Name"; value="Set-ItemProperty"
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Set-ItemProperty                                   7.0.0.0    Microsoft.PowerShell.Management
+
+PS>CommandInvocation(Get-Help): "Get-Help"
+>> ParameterBinding(Get-Help): name="Name"; value="Set-ItemProperty"
+>> ParameterBinding(Get-Help): name="Online"; value="False"
+>> ParameterBinding(Get-Help): name="ErrorAction"; value="Ignore"
+
+NAME
+    Set-ItemProperty
+
+SYNTAX
+    Set-ItemProperty [-Path] <string[]> [-Name] <string> [-Value] <Object> [-PassThru] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>] [-WhatIf]
+    [-Confirm] [<CommonParameters>]
+
+    Set-ItemProperty [-Path] <string[]> -InputObject <psobject> [-PassThru] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>] [-WhatIf] [-Confirm]
+    [<CommonParameters>]
+
+    Set-ItemProperty [-Name] <string> [-Value] <Object> -LiteralPath <string[]> [-PassThru] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>]
+    [-WhatIf] [-Confirm] [<CommonParameters>]
+
+    Set-ItemProperty -LiteralPath <string[]> -InputObject <psobject> [-PassThru] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <pscredential>] [-WhatIf]
+    [-Confirm] [<CommonParameters>]
+
+
+ALIASES
+    sp
+
+
+REMARKS
+    Get-Help cannot find the Help files for this cmdlet on this computer. It is displaying only partial help.
+        -- To download and install Help files for the module that includes this cmdlet, use Update-Help.
+        -- To view the Help topic for this cmdlet online, type: "Get-Help Set-ItemProperty -Online" or
+           go to https://go.microsoft.com/fwlink/?LinkID=2097147.
+
+
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>clear
+]633;D;0]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
+**********************
+PowerShell transcript start
+Start time: 20250730230550
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250730T230530\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-19612-796598.json' -FeatureFlags @() 
+Process ID: 24072
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] 🔧 Đang vô hiệu hóa UAC...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[OK] ✅ [ExternalScript] scoop đã được cài đặt tại: C:\Users\mrtha\scoop\shims\scoop.ps1
+[OK] ✅ [Application] git đã được cài đặt tại: C:\Users\mrtha\scoop\shims\git.exe
+[OK] Đã cấu hình Git với tên: Mr.thaiDESKTOP-RQJ0M4T và email: mr.thai2k5@gmail.com
+Installed apps:
+WARN  The 'extras' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm extras'.
+Installed apps:
+WARN  The 'versions' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm versions'.
+Installed apps:
+WARN  The 'main' bucket already exists. To add this bucket again, first remove it by running 'scoop bucket rm main'.
+[OK] Đã thêm các bucket cần thiết.
+[OK] ✅ [Cmdlet] Enable-WindowsOptionalFeature đã được cài đặt tại: Dism
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Hyper-V
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
+[OK] ✅ Đã cài đặt: Microsoft-Windows-Subsystem-Linux
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All -NoRestart
+[OK] ✅ Đã cài đặt: VirtualMachinePlatform
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: Enable-WindowsOptionalFeature -Online -FeatureName Containers -All -NoRestart
+[OK] ✅ Đã cài đặt: Containers
+[ERROR] vscode chưa được cài đặt hoặc không có trong PATH.
+[INFO] 🔧 Đang cài đặt Visual Studio Code...
+WARN  'vscode' (1.102.2) is already installed.
+Use 'scoop update vscode' to install a new version.
+[OK] Visual Studio Code đã được cài đặt thành công!
+[OK] Cài đặt extension vscode
+[INFO] Đang cài đặt extension : ms-vscode.powershell
+[INFO] Đang cài đặt extension : esbenp.prettier-vscode
+[INFO] Đang cài đặt extension : dbaeumer.vscode-eslint
+[INFO] Đang cài đặt extension : christian-kohler.path-intellisense
+[INFO] Đang cài đặt extension : formulahendry.auto-rename-tag
+[INFO] Đang cài đặt extension : dracula-theme.theme-dracula
+[INFO] Đang cài đặt extension : burkeholland.simple-react-snippets
+[INFO] Đang cài đặt extension : bradlc.vscode-tailwindcss
+[INFO] Đang cài đặt extension : ritwickdey.liveserver
+[INFO] Đang cài đặt extension : streetsidesoftware.code-spell-checker
+[INFO] Đang cài đặt extension : wayou.vscode-todo-highlight
+[INFO] Đang cài đặt extension : alefragnani.bookmarks
+[INFO] Đang cài đặt extension : eamodio.gitlens
+[OK] ✅ [Application] obsidian đã được cài đặt tại: C:\Users\mrtha\scoop\shims\obsidian.exe
+[ERROR] obs-studio chưa được cài đặt hoặc không có trong PATH.
+[INFO] 🔧 Đang cài đặt OBS Studio...
+WARN  'obs-studio' (31.1.1) is already installed.
+Use 'scoop update obs-studio' to install a new version.
+[OK] OBS Studio đã được cài đặt thành công!
+[ERROR] idm chưa được cài đặt hoặc không có trong PATH.
+[INFO] 🔧 Đang cài đặt Internet Download Manager...
+[OK] Internet Download Manager đã được cài đặt thành công!
+[OK] ✅ [Application] wsl đã được cài đặt tại: C:\WINDOWS\system32\wsl.exe
+[INFO] 🔧 Đang kiểm tra/cài đặt WSL kernel...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: wsl --update
+[OK] ✅ WSL đã được cài đặt hoặc cập nhật thành công.
+[INFO] ⚙️ Đang cấu hình WSL sau cài đặt...
+[INFO] 🚀 Đã gửi lệnh với quyền Admin: wsl --install -d Ubuntu-22.04 --no-launch
+[ERROR] 9PN20MSR04DW chưa được cài đặt hoặc không có trong PATH.
+[INFO] Cài đặt: 9PN20MSR04DW
+[OK] ✅ Cấu hình WSL hoàn tất! Hãy khởi động lại nếu cần.
+[ERROR] docker chưa được cài đặt hoặc không có trong PATH.
+[INFO] 🔧 Đang cài đặt Docker...
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFiles\x5cWindowsPS D:\Dev\AM01-DotFiles\Windows> ]633;B
