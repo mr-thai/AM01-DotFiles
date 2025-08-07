@@ -1,0 +1,291 @@
+**********************
+PowerShell transcript start
+Start time: 20250807002905
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250807T002157\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-11272-515304.json' -FeatureFlags @() 
+Process ID: 7176
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 89.43/232.06 GB (38.5% đã dùng)
+💽 Ổ đĩa D:: 157.12/244.14 GB (64.4% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+[ERROR] ❌ Không thể lấy thông tin GPU!
+**********************
+PowerShell transcript end
+End time: 20250807002909
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250807003219
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250807T002157\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-11272-515304.json' -FeatureFlags @() 
+Process ID: 7176
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 89.53/232.06 GB (38.6% đã dùng)
+💽 Ổ đĩa D:: 157.99/244.14 GB (64.7% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+[ERROR] ❌ Không thể lấy thông tin GPU!
+**********************
+PowerShell transcript end
+End time: 20250807003225
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250807003240
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250807T002157\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-11272-515304.json' -FeatureFlags @() 
+Process ID: 7176
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 89.53/232.06 GB (38.6% đã dùng)
+💽 Ổ đĩa D:: 157.99/244.14 GB (64.7% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+[ERROR] ❌ Không thể lấy thông tin GPU!
+**********************
+PowerShell transcript end
+End time: 20250807003243
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250807003310
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250807T002157\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-11272-515304.json' -FeatureFlags @() 
+Process ID: 7176
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 89.44/232.06 GB (38.5% đã dùng)
+💽 Ổ đĩa D:: 157.99/244.14 GB (64.7% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+InvalidOperation: D:\Dev\AM01-DotFiles\Main.ps1:638:54
+Line |
+ 638 |  … Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
+     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Object[]] does not contain a method named 'op_Division'.
+InvalidOperation: D:\Dev\AM01-DotFiles\Main.ps1:638:54
+Line |
+ 638 |  … Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
+     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Object[]] does not contain a method named 'op_Division'.
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFilesPS D:\Dev\AM01-DotFiles> ]633;B
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFilesPS D:\Dev\AM01-DotFiles> ]633;B
+PS>. 'D:\Dev\AM01-DotFiles\Main.ps1'
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 90.05/232.06 GB (38.8% đã dùng)
+💽 Ổ đĩa D:: 169.71/244.14 GB (69.5% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630 NVIDIA GeForce GTX 1650
+InvalidOperation: D:\Dev\AM01-DotFiles\Main.ps1:638:13
+Line |
+ 638 |              $vramGB = [math]::Round($gpu.AdapterRAM / 1GB, 2)
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Object[]] does not contain a method named 'op_Division'.
+InvalidOperation: D:\Dev\AM01-DotFiles\Main.ps1:638:13
+Line |
+ 638 |              $vramGB = [math]::Round($gpu.AdapterRAM / 1GB, 2)
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Object[]] does not contain a method named 'op_Division'.
+
+]633;A]633;P;Cwd=D:\x5cDev\x5cAM01-DotFilesPS D:\Dev\AM01-DotFiles> ]633;B
+**********************
+PowerShell transcript start
+Start time: 20250807092121
+Username: DESKTOP-RQJ0M4T\mrtha
+RunAs User: DESKTOP-RQJ0M4T\mrtha
+Configuration Name: 
+Machine: DESKTOP-RQJ0M4T (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.2.0' -BundledModulesPath 'C:\Users\mrtha\scoop\persist\vscode\data\extensions\ms-vscode.powershell-2025.2.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.2.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\logs\20250807T091903\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\mrtha\scoop\apps\vscode\1.102.2\data\user-data\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-3800-327334.json' -FeatureFlags @() 
+Process ID: 14524
+PSVersion: 7.5.2
+PSEdition: Core
+GitCommitId: 7.5.2
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[INFO] ===== Thông tin Hệ điều hành =====
+🪟 Tên hệ điều hành:     Microsoft Windows 11 Pro
+🏗️  Version:             10.0.26100 (Build 26100)
+🏁 Kiến trúc:            64-bit
+[INFO] ===== Thông tin Ổ cứng =====
+💽 Ổ đĩa C:: 91.42/232.06 GB (39.4% đã dùng)
+💽 Ổ đĩa D:: 176.12/244.14 GB (72.1% đã dùng)
+💽 Ổ đĩa E:: 345.44/476.92 GB (72.4% đã dùng)
+[INFO] ===== Thông tin RAM =====
+💾 RAM đang dùng:         20 GB
+🚀 RAM tối đa hỗ trợ:     32 GB
+🔌 Số khe đã cắm:         2
+📦 Tổng số khe:           2
+[INFO] ===== Thông tin CPU =====
+🖥️ Tên CPU:               Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+⚙️ Số lõi:                4
+🔢 Số luồng:             8
+⏱️ Tốc độ cơ bản:         2.4 GHz
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               Intel(R) UHD Graphics 630
+🖥️ Bộ nhớ GPU:            1 GB
+🔄 Phiên bản driver:      26.20.100.8141
+[INFO] ===== Thông tin GPU =====
+🎮 Tên GPU:               NVIDIA GeForce GTX 1650
+🖥️ Bộ nhớ GPU:            4 GB
+🔄 Phiên bản driver:      32.0.15.7700
+**********************
+PowerShell transcript end
+End time: 20250807092124
+**********************

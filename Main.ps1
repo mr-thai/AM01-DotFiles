@@ -85,7 +85,7 @@ class System_Utils {
         } catch {
             [System_Utils]::Load_Notification("❌ Không có kết nối Internet. Thoát chương trình!", 3)
             exit
-        }
+        } 
     }
 }
 #endregion
@@ -412,7 +412,17 @@ class LazyVim : Tools_Manager {
         }
     }
 }
-
+class TeraCopy : Tools_Manager{
+    static [void] Install () {
+        if (-not [System_Utils]::Is_Install("teracopy")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt TeraCopy...", 1)
+            [Winget]::Install_Packages("teracopy")
+            [System_Utils]::Load_Notification("TeraCopy đã được cài đặt thành công!", 2)
+        }
+    }
+    static [void] Config () {
+    }
+}
 
 #endregion
 #region thiết lập Windows
@@ -568,17 +578,19 @@ class Setup_Win {
 #endregion
 #region hiển thị thông tin hệ thống
 class Show_Info {
-
     static [void] Show_OS_Info() {
-        $os = Get-CimInstance Win32_OperatingSystem
-        $arch = (Get-CimInstance Win32_Processor).AddressWidth
-        [System_Utils]::Load_Notification("===== Thông tin Hệ điều hành =====", 1)
-        Write-Host "🪟 Tên hệ điều hành:     $($os.Caption)"
-        Write-Host "🏗️  Version:             $($os.Version) (Build $($os.BuildNumber))"
-        Write-Host "🏁 Kiến trúc:            $arch-bit"
+        try {
+            $os = Get-CimInstance Win32_OperatingSystem
+            $arch = (Get-CimInstance Win32_Processor).AddressWidth
+            [System_Utils]::Load_Notification("===== Thông tin Hệ điều hành =====", 1)
+            Write-Host "🪟 Tên hệ điều hành:     $($os.Caption)"
+            Write-Host "🏗️  Version:             $($os.Version) (Build $($os.BuildNumber))"
+            Write-Host "🏁 Kiến trúc:            $arch-bit"   
+        }
+        catch {
+            [System_Utils]::Load_Notification("Ko thể đọc hệ diều hành")
+        }
     }
-
-
     static [void] Show_RAM_Info() {
         try {
             $maxRamKB = (Get-CimInstance Win32_PhysicalMemoryArray).MaxCapacity
@@ -588,7 +600,6 @@ class Show_Info {
             $currentRamGB = [math]::Round($currentRamBytes / 1GB)
             $slotsUsed = $ramModules.Count
             $totalSlots = (Get-CimInstance Win32_PhysicalMemoryArray).MemoryDevices
-
             [System_Utils]::Load_Notification("===== Thông tin RAM =====", 1)
             Write-Host "💾 RAM đang dùng:         $currentRamGB GB"
             Write-Host "🚀 RAM tối đa hỗ trợ:     $maxRamGB GB"
@@ -614,23 +625,26 @@ class Show_Info {
             [System_Utils]::Load_Notification("❌ Không thể lấy thông tin CPU!", 3)
         }
     }
-
     static [void] Show_GPU_Info() {
         try {
-            $gpu = Get-CimInstance Win32_VideoController
-            if (-not $gpu) {
-                [System_Utils]::Load_Notification("⚠️ Không phát hiện GPU!", 3)
-                return
-            }
+        $gpus = Get-CimInstance Win32_VideoController
+
+        if (-not $gpus) {
+            [System_Utils]::Load_Notification("⚠️ Không phát hiện GPU!", 3)
+            return
+        }
+
+        foreach ($gpu in $gpus) {
             [System_Utils]::Load_Notification("===== Thông tin GPU =====", 1)
             Write-Host "🎮 Tên GPU:               $($gpu.Name)"
             Write-Host "🖥️ Bộ nhớ GPU:            $([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB"
             Write-Host "🔄 Phiên bản driver:      $($gpu.DriverVersion)"
+        }
+
         } catch {
             [System_Utils]::Load_Notification("❌ Không thể lấy thông tin GPU!", 3)
         }
     }
-
     static [void] Show_Disk_Info() {
         try {
             $drives = Get-CimInstance Win32_LogicalDisk -Filter "DriveType = 3"
@@ -677,33 +691,33 @@ class Main {
         # [Setup_Win]::Disable_UAC()
         # [System_Utils]::Check_Internet()
         # [Setup_Win]::RunChristitus()
-        # $Buckets_Scoop = @("extras", "versions", "main")
+        # $Buckets_Scoop = @("extras", "versions", "main", "nonportable")
         # [Scoop]::Install();
         # [git]::Install();[git]::Config()
         # [Scoop]::Install_Bucket($Buckets_Scoop);
         # $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
         # [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
         # $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
-        $Setup_Tools = @("LazyVim")
-        foreach ($ToolName in $Setup_Tools) {
-            try {
-                $type = [Type]::GetType($ToolName, $false)
-                if ($null -eq $type) {
-                    $type = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
-                        $_.GetType($ToolName, $false)
-                    } | Where-Object { $_ -ne $null }
-                }
+        # $Setup_Tools = @("LazyVim")
+        # foreach ($ToolName in $Setup_Tools) {
+        #     try {
+        #         $type = [Type]::GetType($ToolName, $false)
+        #         if ($null -eq $type) {
+        #             $type = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
+        #                 $_.GetType($ToolName, $false)
+        #             } | Where-Object { $_ -ne $null }
+        #         }
 
-                if ($null -ne $type) {
-                    $type::Install()
-                    $type::Config()
-                } else {
-                    [System_Utils]::Load_Notification("❌ Không tìm thấy class: $ToolName", 3)
-                }
-            } catch {
-                [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
-            }
-        }
+        #         if ($null -ne $type) {
+        #             $type::Install()
+        #             $type::Config()
+        #         } else {
+        #             [System_Utils]::Load_Notification("❌ Không tìm thấy class: $ToolName", 3)
+        #         }
+        #     } catch {
+        #         [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
+        #     }
+        # }
         # $Packages_Scoop = @("extras/winrar")
         # [Scoop]::Install_Packages($Packages_Scoop)
         # $Packages_Winget = @("DucFabulous.UltraViewer")
@@ -716,7 +730,7 @@ class Main {
         # [Setup_Win]::Hide_Widgets()
         # [Setup_Win]::Set_DarkMode()
         # [Setup_Win]::Auto_Hide_Taskbar()
-        # [Show_Info]::Show_All()
+        [Show_Info]::Show_All()
     }
 }
 #endregion
