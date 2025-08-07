@@ -30,16 +30,20 @@ class System_Utils {
         }
     }
     static [void] Load_Countdown([int]$Thoi_Gian) {
-        if ($Thoi_Gian -le 0) {
-            Write-Progress -Activity "Đang chờ..." -Status "Không cần đợi!" -Completed
-            return
+        try {
+            if ($Thoi_Gian -le 0) {
+                Write-Progress -Activity "Đang chờ..." -Status "Không cần đợi!" -Completed
+                return
+            }
+            for ($i = $Thoi_Gian; $i -ge 1; $i--) {
+                $percent = if ($Thoi_Gian -ne 0) { ((($Thoi_Gian - $i) / $Thoi_Gian) * 100) } else { 100 }
+                Write-Progress -Activity "Đang chờ..." -Status "$i giây còn lại..." -PercentComplete $percent
+                Start-Sleep -Seconds 1
+            }
+            Write-Progress -Activity "Đang chờ..." -Status "Hoàn tất" -Completed
+        }catch{
+            [System_Utils]::Load_Notification("loi o [System_Utils]Load_Countdown", 3)
         }
-        for ($i = $Thoi_Gian; $i -ge 1; $i--) {
-            $percent = if ($Thoi_Gian -ne 0) { ((($Thoi_Gian - $i) / $Thoi_Gian) * 100) } else { 100 }
-            Write-Progress -Activity "Đang chờ..." -Status "$i giây còn lại..." -PercentComplete $percent
-            Start-Sleep -Seconds 1
-        }
-        Write-Progress -Activity "Đang chờ..." -Status "Hoàn tất" -Completed
     }
     static [void] Create_New_Window([string]$Command, [bool]$LoadAdmin = $false) {
         if (-not $Command) { return }
@@ -187,7 +191,7 @@ class Git : Tools_Manager {
     static[void] Install () {
         if (-not [System_Utils]::Is_Install("git")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt Git...", 1)
-            scoop install git
+            [Scoop]::Install_Packages("git")
             [System_Utils]::Load_Notification("Git đã được cài đặt thành công!", 2)
         } 
     }
@@ -210,7 +214,7 @@ Class Vscode : Tools_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("vscode")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt Visual Studio Code...", 1)
-            scoop install extras/vscode
+            [Scoop]::Install_Packages("vscode")
             [System_Utils]::Load_Notification("Visual Studio Code đã được cài đặt thành công!", 2)
         }
     }
@@ -244,7 +248,7 @@ Class Obsidian : Tools_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("obsidian")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt Obsidian...", 1)
-            scoop install obsidian
+            [scoop]::Install_Packages("obsidian")
             [System_Utils]::Load_Notification("Obsidian đã được cài đặt thành công!", 2)
         }
     }
@@ -255,7 +259,7 @@ Class ObsStudio : Tools_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("obs-studio")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt OBS Studio...", 1)
-            scoop install extras/obs-studio
+            [Scoop]::Install_Packages("obs-studio")
             [System_Utils]::Load_Notification("OBS Studio đã được cài đặt thành công!", 2)
         }
     }
@@ -266,7 +270,7 @@ class Idm : Tools_Manager {
     static [void] Install () {
         if (-not [System_Utils]::Is_Install("idm")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt Internet Download Manager...", 1)
-            winget install Tonec.InternetDownloadManager -e --accept-source-agreements --accept-package-agreements
+            [Winget]::Install_Packages("Tonec.InternetDownloadManager")
             [System_Utils]::Load_Notification("Internet Download Manager đã được cài đặt thành công!", 2)
         }
     }
@@ -280,7 +284,7 @@ class Docker : Tools_Manager {
     static [void] install (){
         if (-not [System_Utils]::Is_Install("docker")) {
             [System_Utils]::Load_Notification("🔧 Đang cài đặt Docker...", 1)
-            winget install Docker.DockerDesktop -e --accept-source-agreements --accept-package-agreements
+            [Winget]::Install_Packages("Docker.DockerDesktop")
             [System_Utils]::Load_Notification("Docker đã được cài đặt thành công!", 2)
         }
     }
@@ -296,7 +300,6 @@ class VisualStudio : Tools_Manager{
         }
     }
     static [void] Config () {
-        # cài winform và các mhoms thiết lập cần thiết
     }
 }
 class AndroidStudio : Tools_Manager{
@@ -321,19 +324,9 @@ class Office : Tools_Manager {
     static [void] Config () {
         [Office]::Activate_KMS_All()
     }
-    
     static [void] Activate_KMS_All() {
         $url = "irm https://get.activated.win | iex"
         [System_Utils]::Create_New_Window($url, $true)
-    }
-}
-class WSL : Tools_Manager {
-    static [void] Install () {
-      
-    }
-
-    static [void] Config () {
-       
     }
 }
 class TeraCopy : Tools_Manager{
@@ -350,17 +343,16 @@ class TeraCopy : Tools_Manager{
 class LazyVim : Tools_Manager {
     static [void] Install () {
         [LazyVim]::Install_NVim()
-        [LazyVim]::Install_Fonts("Meslo", "v3.4.0")
+        [LazyVim]::Install_Fonts()
         [LazyVim]::Install_LazyVim()
-        [LazyVim]::Install_Packages()
-        [LazyVim]::Sync_Plugin()
         [System_Utils]::Load_Notification("🎉 LazyVim đã được cài đặt thành công!", 2)
     }
-
     static [void] Config () {
+        [System_Utils]::Load_Notification("⚙️ LazyVim Đang được thiết lập.", 1)
+        [LazyVim]::Install_Packages()
+        [LazyVim]::Sync_Plugin()
         [System_Utils]::Load_Notification("⚙️ LazyVim đã sẵn sàng để sử dụng.", 2)
     }
-
     static [void] Install_NVim () {
         if (-not [System_Utils]::Is_Install("nvim")) {
             [System_Utils]::Load_Notification("🔧 Đang cài Neovim...", 1)
@@ -368,8 +360,7 @@ class LazyVim : Tools_Manager {
             [System_Utils]::Load_Notification("✅ Neovim đã được cài đặt!", 2)
         }
     }
-
-    static [void] Install_Fonts ([string]$fontName, [string]$version) {
+    static [void] Install_Fonts () {
         $tempDir = "$env:TEMP\NerdFonts"
         $extractPath = "$tempDir\Extracted"
         $fontsPath = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
@@ -387,15 +378,14 @@ class LazyVim : Tools_Manager {
             Get-ChildItem -Path $extractPath -Filter *.ttf | ForEach-Object {
                 Copy-Item $_.FullName -Destination "$fontsPath\$($_.Name)" -Force
                 Write-Host "✅ Font: $($_.Name)"
+                [System_Utils]::Load_Countdown
             }
 
-            [System_Utils]::Load_Notification("✅ Font $fontName đã được cài đặt!", 2)
+            [System_Utils]::Load_Notification("✅ Nerd Font đã được cài đặt!", 2)
         } catch {
             [System_Utils]::Load_Notification("❌ Lỗi font: $($_.Exception.Message)", 3)
         }
     }
-
-
     static [void] Install_LazyVim () {
         $nvimPath = "$env:LOCALAPPDATA\nvim"
         if (Test-Path $nvimPath) { Remove-Item $nvimPath -Recurse -Force }
@@ -404,7 +394,6 @@ class LazyVim : Tools_Manager {
         git clone https://github.com/LazyVim/starter $nvimPath
         Remove-Item "$nvimPath\.git" -Recurse -Force -ErrorAction SilentlyContinue
     }
-
     static [void] Install_Packages () {
         $pkgs = @("curl", "wget", "gcc", "make", "unzip", "ripgrep", "fd", "llvm", "zig")
         foreach ($p in $pkgs) {
@@ -414,7 +403,6 @@ class LazyVim : Tools_Manager {
             }
         }
     }
-
     static [void] Sync_Plugin () {
         [System_Utils]::Load_Notification("🔁 Đồng bộ plugin LazyVim...", 1)
         try {
@@ -426,7 +414,15 @@ class LazyVim : Tools_Manager {
         }
     }
 }
+class WSL : Tools_Manager {
+    static [void] Install () {
+      
+    }
 
+    static [void] Config () {
+       
+    }
+}
 
 #endregion
 #region thiết lập Windows
@@ -692,18 +688,17 @@ class Main {
 
     }
     static [void] start (){
-        # [Setup_Win]::Disable_UAC()
-        # [System_Utils]::Check_Internet()
-        # [Setup_Win]::Install_VC_AllInOne()
-        # [Setup_Win]::RunChristitus()
-        # $Buckets_Scoop = @("extras", "versions", "main", "nonportable")
-        # [Scoop]::Install();
-        # [git]::Install();[git]::Config()
-        # [Scoop]::Install_Bucket($Buckets_Scoop);
-        # $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
-        # [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
-        # $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
-        $Setup_Tools = @("LazyVim")
+        [Setup_Win]::Disable_UAC()
+        [System_Utils]::Check_Internet()
+        [Setup_Win]::Install_VC_AllInOne()
+        [Setup_Win]::RunChristitus()
+        $Buckets_Scoop = @("extras", "versions", "main", "nonportable")
+        [Scoop]::Install();
+        [git]::Install();[git]::Config()
+        [Scoop]::Install_Bucket($Buckets_Scoop);
+        $Feature = @("Microsoft-Hyper-V","VirtualMachinePlatform","Containers")
+        [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
+        $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office", "TeraCopy", "WSL")
         foreach ($ToolName in $Setup_Tools) {
             try {
                 $type = [Type]::GetType($ToolName, $false)
@@ -723,21 +718,20 @@ class Main {
                 [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
             }
         }
-        # $Packages_Scoop = @("extras/winrar")
-        # [Scoop]::Install_Packages($Packages_Scoop)
-        # $Packages_Winget = @("DucFabulous.UltraViewer")
-        # [Winget]::Install_Packages($Packages_Winget)
-        # [Setup_Win]::Set_TimeZone_UTC8()
-        # [Setup_Win]::Create_GodMode()
-        # [Setup_Win]::Always_keep_the_screen()
-        # [Setup_Win]::Hide_Widgets()
-        # [Setup_Win]::Set_DarkMode()
-        # [Setup_Win]::Auto_Hide_Taskbar()
-        # [Show_Info]::Show_All()
+        $Packages_Scoop = @("extras/winrar")
+        [Scoop]::Install_Packages($Packages_Scoop)
+        $Packages_Winget = @("DucFabulous.UltraViewer")
+        [Winget]::Install_Packages($Packages_Winget)
+        [Setup_Win]::Set_TimeZone_UTC8()
+        [Setup_Win]::Create_GodMode()
+        [Setup_Win]::Always_keep_the_screen()
+        [Setup_Win]::Hide_Widgets()
+        [Setup_Win]::Set_DarkMode()
+        [Setup_Win]::Auto_Hide_Taskbar()
+        [Show_Info]::Show_All()
     }
 }
 #endregion
-# Khối script chính
 [Main]::MainStart()
 
 # crack idm

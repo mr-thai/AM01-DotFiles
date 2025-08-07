@@ -289,3 +289,59 @@ WSManStackVersion: 3.0
 PowerShell transcript end
 End time: 20250807092124
 **********************
+**********************
+Windows PowerShell transcript start
+Start time: 20250807153916
+Username: ADMIN-PC\TNC
+RunAs User: ADMIN-PC\TNC
+Configuration Name: 
+Machine: ADMIN-PC (Microsoft Windows NT 10.0.22621.0)
+Host Application: powershell -NoProfile -ExecutionPolicy Bypass -File E:\Document\Project\AM01\AM01-DotFiles\Main.ps1
+Process ID: 8920
+PSVersion: 5.1.22621.4249
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4249
+BuildVersion: 10.0.22621.4249
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+[INFO] ?? ?ang v? hi?u h?a UAC...
+[INFO] ?? ?? g?i l?nh v?i quy?n Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+PS>TerminatingError(Invoke-WebRequest): "The remote name could not be resolved: 'www.google.com'"
+[ERROR] ? Kh?ng c? k?t n?i Internet. Tho?t ch??ng tr?nh!
+**********************
+Windows PowerShell transcript end
+End time: 20250807153917
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20250807155039
+Username: ADMIN-PC\TNC
+RunAs User: ADMIN-PC\TNC
+Configuration Name: 
+Machine: ADMIN-PC (Microsoft Windows NT 10.0.22621.0)
+Host Application: powershell -NoProfile -ExecutionPolicy Bypass -File E:\Document\Project\AM01\AM01-DotFiles\Main.ps1
+Process ID: 12252
+PSVersion: 5.1.22621.4249
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4249
+BuildVersion: 10.0.22621.4249
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+[INFO] ?? ?ang v? hi?u h?a UAC...
+[INFO] ?? ?? g?i l?nh v?i quy?n Admin: Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Value 0 -Force
+[LOG] ? Visual C++ Redistributable ?? t?n t?i. B? qua c?i ??t.
+[INFO] ?? ?ang ch?y script t?i ?u h? th?ng t? Christitus...
+[ERROR] scoop ch?a ???c c?i ??t ho?c kh?ng c? trong PATH.
+[INFO] ?? ?ang c?i ??t Scoop...
+PS>$global:?
+True
+**********************
+Windows PowerShell transcript end
+End time: 20250807155050
+**********************
