@@ -150,7 +150,6 @@ class Winget : Packages_Manager {
                     continue
                 }
             }
-                # Cài đặt gói bằng Winget
         } else {
             [System_Utils]::Load_Notification("✅ $Packages đã được cài đặt.", 2)
         }
@@ -412,6 +411,41 @@ class LazyVim : Tools_Manager {
         } catch {
             [System_Utils]::Load_Notification("⚠️ Lỗi khi sync plugin: $($_.Exception.Message)", 3)
         }
+    }
+}
+class Scrcpy : Tools_Manager{
+    static [void] Install() {
+        $url = "https://github.com/Genymobile/scrcpy/releases/download/v2.4/scrcpy-win64-v2.4.zip"
+        $tempZip = "$env:TEMP\scrcpy.zip"
+        $extractDir = "$env:LOCALAPPDATA\scrcpy"
+        try {
+            Write-Host "📥 Đang tải Scrcpy từ GitHub..."
+            Invoke-WebRequest -Uri $url -OutFile $tempZip -UseBasicParsing
+            if (Test-Path $extractDir) {
+                Remove-Item -Path $extractDir -Recurse -Force
+            }
+            Expand-Archive -Path $tempZip -DestinationPath $extractDir -Force
+            $inner = Get-ChildItem $extractDir | Where-Object { $_.PSIsContainer } | Select-Object -First 1
+            if ($inner -and (Test-Path "$($inner.FullName)\scrcpy.exe")) {
+                Move-Item -Path "$($inner.FullName)\*" -Destination $extractDir -Force
+                Remove-Item $inner.FullName -Recurse -Force
+            }
+            $env:Path += ";$extractDir"
+            if (Get-Command "scrcpy" -ErrorAction SilentlyContinue) {
+                Write-Host "✅ Đã cài đặt Scrcpy thành công!"
+            } else {
+                Write-Host "❌ Cài đặt thất bại, không tìm thấy scrcpy.exe"
+            }
+        } catch {
+            Write-Host "❌ Lỗi khi cài Scrcpy: $($_.Exception.Message)"
+        } finally {
+            if (Test-Path $tempZip) {
+                Remove-Item $tempZip -Force
+            }
+        }
+    }
+    static [void] Config () {
+
     }
 }
 class WSL : Tools_Manager {
@@ -689,16 +723,17 @@ class Main {
     }
     static [void] start (){
         [Setup_Win]::Disable_UAC()
+        [System_Utils]::Load_Countdown(5)
         [System_Utils]::Check_Internet()
-        [Setup_Win]::Install_VC_AllInOne()
         [Setup_Win]::RunChristitus()
         $Buckets_Scoop = @("extras", "versions", "main", "nonportable")
         [Scoop]::Install();
         [git]::Install();[git]::Config()
         [Scoop]::Install_Bucket($Buckets_Scoop);
+        [Setup_Win]::Install_VC_AllInOne() 
         $Feature = @("Microsoft-Hyper-V","VirtualMachinePlatform","Containers")
         [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
-        $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office", "TeraCopy", "WSL")
+        $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office", "TeraCopy", "Scrcpy", "WSL")
         foreach ($ToolName in $Setup_Tools) {
             try {
                 $type = [Type]::GetType($ToolName, $false)
@@ -718,7 +753,7 @@ class Main {
                 [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
             }
         }
-        $Packages_Scoop = @("extras/winrar")
+        $Packages_Scoop = @("winrar")
         [Scoop]::Install_Packages($Packages_Scoop)
         $Packages_Winget = @("DucFabulous.UltraViewer")
         [Winget]::Install_Packages($Packages_Winget)
@@ -733,5 +768,3 @@ class Main {
 }
 #endregion
 [Main]::MainStart()
-
-# crack idm
