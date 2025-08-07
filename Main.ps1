@@ -336,10 +336,21 @@ class WSL : Tools_Manager {
        
     }
 }
+class TeraCopy : Tools_Manager{
+    static [void] Install () {
+        if (-not [System_Utils]::Is_Install("teracopy")) {
+            [System_Utils]::Load_Notification("🔧 Đang cài đặt TeraCopy...", 1)
+            [Winget]::Install_Packages("teracopy")
+            [System_Utils]::Load_Notification("TeraCopy đã được cài đặt thành công!", 2)
+        }
+    }
+    static [void] Config () {
+    }
+}
 class LazyVim : Tools_Manager {
     static [void] Install () {
         [LazyVim]::Install_NVim()
-        [LazyVim]::Install_Fonts("Mesloo", "v3.4.0")
+        [LazyVim]::Install_Fonts("Meslo", "v3.4.0")
         [LazyVim]::Install_LazyVim()
         [LazyVim]::Install_Packages()
         [LazyVim]::Sync_Plugin()
@@ -359,17 +370,19 @@ class LazyVim : Tools_Manager {
     }
 
     static [void] Install_Fonts ([string]$fontName, [string]$version) {
-        $url = "https://github.com/ryanoasis/nerd-fonts/releases/download/$version/$fontName.zip"
         $tempDir = "$env:TEMP\NerdFonts"
         $extractPath = "$tempDir\Extracted"
         $fontsPath = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+
+        if (-not (Test-Path $fontsPath)) {
+            New-Item -Path $fontsPath -ItemType Directory -Force | Out-Null
+        }
 
         Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
         New-Item -Path $extractPath -ItemType Directory -Force | Out-Null
 
         try {
-            Invoke-WebRequest $url -OutFile "$tempDir\$fontName.zip" -UseBasicParsing -ErrorAction Stop
-            Expand-Archive "$tempDir\$fontName.zip" -DestinationPath $extractPath -Force
+            Expand-Archive ".\File_Config\FiraCode.zip" -DestinationPath $extractPath -Force
 
             Get-ChildItem -Path $extractPath -Filter *.ttf | ForEach-Object {
                 Copy-Item $_.FullName -Destination "$fontsPath\$($_.Name)" -Force
@@ -381,6 +394,7 @@ class LazyVim : Tools_Manager {
             [System_Utils]::Load_Notification("❌ Lỗi font: $($_.Exception.Message)", 3)
         }
     }
+
 
     static [void] Install_LazyVim () {
         $nvimPath = "$env:LOCALAPPDATA\nvim"
@@ -412,17 +426,7 @@ class LazyVim : Tools_Manager {
         }
     }
 }
-class TeraCopy : Tools_Manager{
-    static [void] Install () {
-        if (-not [System_Utils]::Is_Install("teracopy")) {
-            [System_Utils]::Load_Notification("🔧 Đang cài đặt TeraCopy...", 1)
-            [Winget]::Install_Packages("teracopy")
-            [System_Utils]::Load_Notification("TeraCopy đã được cài đặt thành công!", 2)
-        }
-    }
-    static [void] Config () {
-    }
-}
+
 
 #endregion
 #region thiết lập Windows
@@ -690,6 +694,7 @@ class Main {
     static [void] start (){
         # [Setup_Win]::Disable_UAC()
         # [System_Utils]::Check_Internet()
+        # [Setup_Win]::Install_VC_AllInOne()
         # [Setup_Win]::RunChristitus()
         # $Buckets_Scoop = @("extras", "versions", "main", "nonportable")
         # [Scoop]::Install();
@@ -698,39 +703,37 @@ class Main {
         # $Feature = @("Microsoft-Hyper-V","Microsoft-Windows-Subsystem-Linux","VirtualMachinePlatform","Containers")
         # [Windows_Features]::Install(); [Windows_Features]::Install_Packages($Feature)
         # $Setup_Tools = @("Vscode", "Obsidian", "ObsStudio", "Idm", "WSL", "Docker", "VisualStudio", "AndroidStudio", "LazyVim", "Office")
-        # $Setup_Tools = @("LazyVim")
-        # foreach ($ToolName in $Setup_Tools) {
-        #     try {
-        #         $type = [Type]::GetType($ToolName, $false)
-        #         if ($null -eq $type) {
-        #             $type = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
-        #                 $_.GetType($ToolName, $false)
-        #             } | Where-Object { $_ -ne $null }
-        #         }
+        $Setup_Tools = @("LazyVim")
+        foreach ($ToolName in $Setup_Tools) {
+            try {
+                $type = [Type]::GetType($ToolName, $false)
+                if ($null -eq $type) {
+                    $type = [AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object {
+                        $_.GetType($ToolName, $false)
+                    } | Where-Object { $_ -ne $null }
+                }
 
-        #         if ($null -ne $type) {
-        #             $type::Install()
-        #             $type::Config()
-        #         } else {
-        #             [System_Utils]::Load_Notification("❌ Không tìm thấy class: $ToolName", 3)
-        #         }
-        #     } catch {
-        #         [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
-        #     }
-        # }
+                if ($null -ne $type) {
+                    $type::Install()
+                    $type::Config()
+                } else {
+                    [System_Utils]::Load_Notification("❌ Không tìm thấy class: $ToolName", 3)
+                }
+            } catch {
+                [System_Utils]::Load_Notification("❌ Lỗi khi xử lý công cụ $ToolName : $($_.Exception.Message)", 3)
+            }
+        }
         # $Packages_Scoop = @("extras/winrar")
         # [Scoop]::Install_Packages($Packages_Scoop)
         # $Packages_Winget = @("DucFabulous.UltraViewer")
         # [Winget]::Install_Packages($Packages_Winget)
-
-        # [Setup_Win]::Install_VC_AllInOne()
         # [Setup_Win]::Set_TimeZone_UTC8()
         # [Setup_Win]::Create_GodMode()
         # [Setup_Win]::Always_keep_the_screen()
         # [Setup_Win]::Hide_Widgets()
         # [Setup_Win]::Set_DarkMode()
         # [Setup_Win]::Auto_Hide_Taskbar()
-        [Show_Info]::Show_All()
+        # [Show_Info]::Show_All()
     }
 }
 #endregion
